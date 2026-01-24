@@ -31,8 +31,8 @@ jobs:
 
       # 5 Build Eleventy site
       - name: Build Eleventy
-        run: npm run build && npx @11ty/eleventy --serve
-
+        run: npm run build && npx @11ty/eleventy 
+        
       # 6 Add .nojekyll to ignore Jekyll
       - name: Disable Jekyll
         run: touch docs/.nojekyll
