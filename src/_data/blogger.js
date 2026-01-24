@@ -3,22 +3,36 @@ const Parser = require("rss-parser");
 const parser = new Parser();
 
 module.exports = async function () {
-  const feedUrl = "https://ameopoema.com/feeds/posts/default";
+  const baseUrl = "https://ameopoema.com/feeds/posts/default";
+  const batchSize = 150;
+  let allItems = [];
+  let index = 1;
+  let more = true;
 
-  // Fetch the feed XML and cache it
-  const xml = await EleventyFetch(feedUrl, {
-    duration: "30m",
-    type: "text"
-  });
+  while (more) {
+    const url = `${baseUrl}?start-index=${index}&max-results=${batchSize}`;
+    const xml = await EleventyFetch(url, {
+      duration: "30m",
+      type: "text"
+    });
 
-  // Parse the XML into a JS object
-  const feed = await parser.parseString(xml);
+    const feed = await parser.parseString(xml);
+    const items = feed.items || [];
 
-  // Return posts formatted for Eleventy
-  return feed.items.map(item => {
+    allItems.push(...items);
+
+    // Stop if we got less than the batch size
+    if (items.length < batchSize) {
+      more = false;
+    } else {
+      index += batchSize;
+    }
+  }
+
+  // Transform posts for Eleventy
+  return allItems.map(item => {
     const parts = item.link.split("/");
-    const slug = parts[parts.length - 1].replace(/\/$/, ""); // strip trailing slash
-
+    const slug = parts[parts.length - 1].replace(/\/$/, "");
     const publishedDate = item.pubDate
       ? new Date(item.pubDate)
       : new Date();
@@ -26,12 +40,12 @@ module.exports = async function () {
     return {
       id: item.guid || item.link,
       title: item.title,
-      content: item.content,   // HTML
+      content: item.content,
       published: publishedDate,
       updated: item.isoDate
         ? new Date(item.isoDate)
         : publishedDate,
-      permalink: `/${publishedDate.getFullYear()}/${String(
+      permalink: `/ameopoema/${publishedDate.getFullYear()}/${String(
         publishedDate.getMonth() + 1
       ).padStart(2, "0")}/${slug}/`
     };
