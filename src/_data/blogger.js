@@ -29,6 +29,8 @@ module.exports = async function () {
     }
   }
 
+  allItems.reverse();
+  
   // Transform posts for Eleventy
   return allItems.map(item => {
     const parts = item.link.split("/");
