@@ -25,18 +25,17 @@ jobs:
       # 3 Install dependencies
       - run: npm install
 
-      # 4 Build Eleventy site
-      - name: Build Eleventy
-        run: npm run build
-
-      # 5 Add .nojekyll to ignore Jekyll
-      - name: Disable Jekyll
-        run: touch docs/.nojekyll
-
-
-      # 6 Remove existing pages and clear cache
+      # 4 Remove existing pages and clear cache
       - name: delete cache
         run: rm -rf .cache
+
+      # 5 Build Eleventy site
+      - name: Build Eleventy
+        run: npm run build && npx @11ty/eleventy --serve
+
+      # 6 Add .nojekyll to ignore Jekyll
+      - name: Disable Jekyll
+        run: touch docs/.nojekyll
 
       # 7 Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
