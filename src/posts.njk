@@ -1,0 +1,13 @@
+---
+pagination:
+  data: blogger
+  size: 1
+  alias: post
+permalink: "{{ post.permalink }}"
+title: "{{ post.title }}"
+published: "{{ post.published }}"
+updated: "{{ post.updated }}"
+layout: post.njk
+---
+
+{{ post.content | safe }}

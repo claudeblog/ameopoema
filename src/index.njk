@@ -1,0 +1,13 @@
+---
+layout: base.njk
+title: Ameopoema
+---
+
+<ul>
+{% for post in blogger | reverse %}
+  <li>
+    <a href="{{ post.permalink }}">{{ post.title }}</a>
+    — {{ post.published | date("yyyy-MM-dd") }}
+  </li>
+{% endfor %}
+</ul>

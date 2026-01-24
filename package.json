@@ -1,0 +1,13 @@
+{
+  "name": "ameopoema-blog",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npx @11ty/eleventy"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-fetch": "^4.0.1",
+    "@11ty/eleventy-plugin-rss": "^1.2.0"
+  }
+}
