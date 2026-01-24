@@ -47,7 +47,7 @@ module.exports = async function () {
       updated: item.isoDate
         ? new Date(item.isoDate)
         : publishedDate,
-      permalink: `/${publishedDate.getFullYear()}/${String(
+      permalink: `/ameopoema/${publishedDate.getFullYear()}/${String(
         publishedDate.getMonth() + 1
       ).padStart(2, "0")}/${slug}/`
     };
