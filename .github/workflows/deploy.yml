@@ -14,26 +14,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # 1️⃣ Checkout the repo
+      # 1 Checkout the repo
       - uses: actions/checkout@v4
 
-      # 2️⃣ Setup Node.js
+      # 2 Setup Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # 3️⃣ Install dependencies
+      # 3 Install dependencies
       - run: npm install
 
-      # 4️⃣ Build Eleventy site
+      # 4 Build Eleventy site
       - name: Build Eleventy
         run: npm run build
 
-      # 5️⃣ Add .nojekyll to ignore Jekyll
+      # 5 Add .nojekyll to ignore Jekyll
       - name: Disable Jekyll
         run: touch docs/.nojekyll
 
-      # 6️⃣ Deploy to GitHub Pages
+
+      # 6 Remove existing pages and clear cache
+      - name: delete cache
+        run: rm -rf .cache
+
+      # 7 Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
