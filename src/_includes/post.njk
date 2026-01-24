@@ -3,14 +3,14 @@ layout: base.njk
 ---
 
 <article>
-  <h1>{{ title }}</h1>
+  <h1>{{ post.title }}</h1>
   <p>
     Published:
-    <time datetime="{{ published }}">{{ published | date("yyyy-MM-dd") }}</time>
-    {% if updated %}
+    <time datetime="{{ post.published }}">{{ post.published | date("yyyy-MM-dd") }}</time>
+    {% if post.updated %}
     · Updated:
-    <time datetime="{{ updated }}">{{ updated | date("yyyy-MM-dd") }}</time>
+    <time datetime="{{ post.updated }}">{{ post.updated | date("yyyy-MM-dd") }}</time>
     {% endif %}
   </p>
-  {{ content | safe }}
+  {{ post.content | safe }}
 </article>
