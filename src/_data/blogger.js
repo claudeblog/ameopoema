@@ -3,7 +3,7 @@ const Parser = require("rss-parser");
 const parser = new Parser();
 
 module.exports = async function () {
-  const baseUrl = "https://ameopoema.com/feeds/posts/default";
+  const baseUrl = "https://ameopoemaameopoema.blogspot.com/feeds/posts/default";
   const batchSize = 150;
   let allItems = [];
   let index = 1;
