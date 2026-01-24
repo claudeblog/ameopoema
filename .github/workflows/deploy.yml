@@ -27,11 +27,11 @@ jobs:
 
       # 4 Remove existing pages and clear cache
       - name: delete cache
-        run: rm -rf .cache && rm -rf /docs
+        run: rm -rf .cache && rm -rf docs
 
       # 5 Build Eleventy site
       - name: Build Eleventy
-        run: mkdir /docs && npm run build && npx @11ty/eleventy 
+        run: mkdir docs && npm run build && npx @11ty/eleventy 
 
       # 6 Add .nojekyll to ignore Jekyll
       - name: Disable Jekyll
