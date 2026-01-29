@@ -3,11 +3,27 @@ layout: base.njk
 title: Ameopoema
 ---
 
-<ul>
+<ul class="post-list">
 {% for post in blogger | reverse %}
-  <li>
-    <a href="{{ post.permalink | url }}">{{ post.title }}</a>
-    — {{ post.published | date("yyyy-MM-dd") }}
+  {% set cover = post.content | firstImage %}
+
+  <li class="post-card">
+    <a href="{{ post.permalink | url }}">
+      
+      {% if cover %}
+        <div class="post-cover">
+          <img src="{{ cover }}" alt="">
+        </div>
+      {% endif %}
+
+      <div class="post-meta">
+        <h2>{{ post.title }}</h2>
+        <time datetime="{{ post.published }}">
+          {{ post.published | date("yyyy-MM-dd") }}
+        </time>
+      </div>
+
+    </a>
   </li>
 {% endfor %}
 </ul>
