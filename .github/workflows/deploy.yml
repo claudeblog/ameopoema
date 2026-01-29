@@ -55,7 +55,10 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
-          git pull
+             # Puxa apenas se houver upstream
+          if git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1; then
+            git pull --ff-only
+          fi
 
           git add -A
           if git diff-index --quiet HEAD --; then
