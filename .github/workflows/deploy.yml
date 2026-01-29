@@ -2,7 +2,8 @@ name: Build, Incremental Backup & Deploy
 
 on:
   schedule:
-    - cron: "*/5 * * * *"   # roda a cada 5 minutos
+    - cron: "*/5 * * * *"  # roda a cada 5 minutos
+  workflow_dispatch:       # permite disparo manual
   push:
     branches:
       - main
@@ -28,17 +29,21 @@ jobs:
       # 3. Install dependencies
       - run: npm ci
 
-      # 4. Build Eleventy site
+      # 4. Clean build: apaga _site antes do build
+      - name: Clean _site
+        run: rm -rf _site/*
+
+      # 5. Build Eleventy site
       - name: Build Eleventy
         run: npm run build
         env:
           ELEVENTY_PATH_PREFIX: /ameopoema/
 
-      # 5. Disable Jekyll
+      # 6. Disable Jekyll
       - name: Disable Jekyll
         run: touch _site/.nojekyll
 
-      # 6 Backup gh-pages
+      # 7. Backup gh-pages
       - name: Backup site if changed
         run: |
           cd _site
@@ -64,9 +69,11 @@ jobs:
             git push origin backup-gh-pages --tags
           fi
 
-      # 7 Deploy to GitHub Pages
+      # 8. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
+          # Limpa a branch gh-pages antes de deploy para forçar clean build
+          clean: true
