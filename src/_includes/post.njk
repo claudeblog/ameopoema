@@ -5,7 +5,7 @@ title: "Ameopoema"
 
 <article>
   <h1>{{ post.title }}
-    <time datetime="{{ post.published }}">{{ post.published | date("yyyy-MM-dd") }}</time>
+    <time datetime="{{ post.published }}">{{ post.published | date("dd/MM/yyyy") }}</time>
   </h1>
   <p></p>
   {{ post.content | safe }}

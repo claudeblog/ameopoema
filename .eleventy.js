@@ -29,7 +29,7 @@ module.exports = function (eleventyConfig) {
     );
   });
 
-  eleventyConfig.addFilter("date", (dateObj, format = "yyyy-MM-dd") => {
+  eleventyConfig.addFilter("date", (dateObj, format = "dd/MM/yyyy") => {
     return DateTime.fromJSDate(dateObj).toFormat(format);
   });
 

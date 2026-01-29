@@ -42,7 +42,7 @@ module.exports = async function () {
   while (more) {
     const url = `${baseUrl}?start-index=${index}&max-results=${batchSize}`;
     const xml = await EleventyFetch(url, {
-      duration: "30m",
+      duration: "5m",
       type: "text"
     });
 

@@ -12,7 +12,7 @@
 
       {% if post.published %}
         <time datetime="{{ post.published }}">
-          {{ post.published | date("yyyy-MM-dd") }}
+          {{ post.published | date("dd/MM/yyyy") }}
         </time>
       {% endif %}
     </div>
