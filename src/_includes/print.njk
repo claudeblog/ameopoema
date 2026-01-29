@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
+
+  <style>
+    body {
+      background: white;
+    }
+
+    main {
+      max-width: 42rem;
+      margin: 2rem auto;
+      padding: 0;
+      box-shadow: none;
+      background: white;
+    }
+
+    article {
+      page-break-after: always;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    @media print {
+      a {
+        border: none;
+        color: black;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    {{ content | safe }}
+  </main>
+</body>
+</html>
