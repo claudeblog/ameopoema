@@ -19,7 +19,6 @@ body {
 }
 
 /* ===== Página ===== */
-header,
 main {
     max-width: 40rem;
     margin: 2rem auto;
@@ -27,23 +26,6 @@ main {
     background-color: #fbfaf7;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     border-radius: 2px;
-}
-
-/* ===== Header ===== */
-header {
-    margin-bottom: 1.5rem;
-}
-
-header h1 {
-    font-size: 2rem;
-    font-weight: normal;
-    letter-spacing: 0.02em;
-    margin: 0;
-}
-
-header a {
-    text-decoration: none;
-    color: inherit;
 }
 
 /* ===== Links (não azulão) ===== */
@@ -100,7 +82,7 @@ article time {
     color: #777;
 }
 
-/* ===== Imagens e embeds ===== */
+/* ===== Imagens ===== */
 article img {
     max-width: 100%;
     height: auto;
@@ -164,13 +146,111 @@ article img {
     white-space: nowrap;
 }
 
-/* ===== Mobile: ritmo editorial ===== */
+/* =========================================================
+   NAVEGAÇÃO (desktop + mobile, CSS only)
+   ========================================================= */
+
+.site-header {
+    background-color: #fbfaf7;
+    border-bottom: 1px solid #ddd6cc;
+}
+
+.nav {
+    width: 100%;
+}
+
+.nav-inner {
+    max-width: 40rem;
+    margin: auto;
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    position: relative;
+}
+
+/* título */
+.site-title {
+    font-family: "Palatino Linotype", Georgia, serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    text-transform: lowercase;
+    white-space: nowrap;
+}
+
+/* links desktop */
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links li {
+    margin: 0;
+}
+
+.nav-links a {
+    font-size: 0.9rem;
+    border-bottom: none;
+    opacity: 0.8;
+    padding: 0 0.6rem; 
+}
+
+.nav-links a:hover {
+    opacity: 1;
+}
+
+/* ===== Burger (CSS only) ===== */
+.nav-toggle {
+    display: none;
+}
+
+.nav-burger {
+    display: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1;
+}
+
+/* ===== Mobile ===== */
 @media (max-width: 640px) {
 
-    header,
     main {
         margin: 1rem;
         padding: 1.5rem;
+    }
+
+    /* título menor */
+    .site-title {
+        font-size: 1.25rem;
+    }
+
+    /* mostra burger */
+    .nav-burger {
+        display: block;
+    }
+
+    /* esconde menu */
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #fbfaf7;
+        padding: 1.2rem 1.5rem;
+        flex-direction: column;
+        gap: 0.75rem;
+        border-top: 1px solid #ddd6cc;
+        z-index: 10;
+    }
+
+    /* abre menu */
+    .nav-toggle:checked + .nav-burger + .site-title + .nav-links {
+        display: flex;
     }
 
     /* Página do post */
@@ -194,45 +274,4 @@ article img {
         font-size: 0.75rem;
         opacity: 0.75;
     }
-}
-
-.site-nav {
-    border-bottom: 1px solid #ddd6cc;
-    background-color: #fbfaf7;
-}
-
-.nav-inner {
-    max-width: 40rem;
-    margin: auto;
-    padding: 1.2rem 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 1rem;
-}
-
-.site-title {
-    font-family: "Palatino Linotype", Georgia, serif;
-    font-size: 1.4rem;
-    letter-spacing: 0.05em;
-    text-transform: lowercase;
-}
-
-.nav-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.nav-links a {
-    font-size: 0.9rem;
-    border-bottom: none;
-    opacity: 0.8;
-}
-
-.nav-links a:hover {
-    opacity: 1;
 }
