@@ -83,7 +83,7 @@ module.exports = async function () {
 
         const filename = hashFilename(imageUrl);
         const localPath = path.join(postImageDir, filename);
-        const publicPath = `/images/posts/${slug}/${filename}`;
+        const publicPath = `images/posts/${slug}/${filename}`;
 
         if (!fs.existsSync(localPath)) {
           await downloadImage(imageUrl, localPath);
