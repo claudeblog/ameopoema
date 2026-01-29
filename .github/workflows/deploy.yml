@@ -39,25 +39,25 @@ jobs:
       # 6 Backup gh-pages
       - name: Backup gh-pages
         run: |
-          # Configura git
-          cd _site
+          TMP_DIR=$(mktemp -d)
+          cp -r _site/* $TMP_DIR
+
+          cd $TMP_DIR
           git init
           git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git fetch origin gh-pages --depth=1
-          git checkout -b gh-pages origin/gh-pages || git checkout -b gh-pages
+          git fetch origin backup-gh-pages --depth=1 || true
+          git checkout -b backup-gh-pages origin/backup-gh-pages || git checkout -b backup-gh-pages
 
-          # Adiciona tudo
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
           git add -A
-
-          # Commit com data
           git commit -m "Backup do site - $(date -u +'%Y-%m-%d %H:%M:%S UTC')" || echo "No changes to commit"
 
-          # Cria tag com timestamp
           TAG_NAME="backup-$(date -u +'%Y%m%d%H%M%S')"
           git tag $TAG_NAME || echo "Tag já existe"
 
-          # Push commit e tag
-          git push origin gh-pages --tags
+          git push origin backup-gh-pages --tags
 
       # 6. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
