@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 
-const IMAGES_DIR = path.join("src", "images", "posts");
+const IMAGES_DIR = path.join("_site", "images", "posts");
 
 function slugify(str) {
   return str
