@@ -2,11 +2,12 @@
 layout: base.njk
 title: Ameopoema
 ---
+<p>pathPrefix = {{ pathPrefix }}</p>
 
 <ul>
 {% for post in blogger | reverse %}
   <li>
-    <a href="{{ post.permalink }}">{{ post.title }}</a>
+    <a href="{{ post.permalink | url }}">{{ post.title }}</a>
     — {{ post.published | date("yyyy-MM-dd") }}
   </li>
 {% endfor %}
