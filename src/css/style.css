@@ -195,3 +195,44 @@ article img {
         opacity: 0.75;
     }
 }
+
+.site-nav {
+    border-bottom: 1px solid #ddd6cc;
+    background-color: #fbfaf7;
+}
+
+.nav-inner {
+    max-width: 40rem;
+    margin: auto;
+    padding: 1.2rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+.site-title {
+    font-family: "Palatino Linotype", Georgia, serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    text-transform: lowercase;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.nav-links a {
+    font-size: 0.9rem;
+    border-bottom: none;
+    opacity: 0.8;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+}

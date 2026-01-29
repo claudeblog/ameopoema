@@ -1,18 +1,39 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" href="{{ '/favicon.ico' | url }}">
-  <title>Ameopoema.com</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
-</head>
-<body>
-  <header>
-    <h1><a href="/">Ame o poema</a></h1>
-  </header>
-  <main>
-    {{ content | safe }}
-  </main>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="{{ '/favicon.ico' | url }}">
+    <title>Ameopoema.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
+  </head>
+  <body>
+    <header>
+      <nav class="site-nav">
+        <div class="nav-inner">
+          <a class="site-title" href="{{ '/' | url }}">ameopoema.com</a>
+          <ul class="nav-links">
+            <li>
+              <a href="{{ '/haicais/' | url }}">Haicais</a>
+            </li>
+            <li>
+              <a href="{{ '/poesias/' | url }}">Poesias</a>
+            </li>
+            <li>
+              <a href="{{ '/textos/' | url }}">Textos</a>
+            </li>
+            <li>
+              <a href="{{ '/tags/' | url }}">Tags</a>
+            </li>
+            <li>
+              <a href="{{ '/impressa/' | url }}">Versão Impressa</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      {{ content | safe }}
+    </main>
+  </body>
 </html>

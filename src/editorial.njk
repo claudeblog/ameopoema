@@ -1,0 +1,18 @@
+---
+pagination:
+  data: collections.editorialPages
+  size: 1
+  alias: editorial
+permalink: "/{{ editorial.slug }}/"
+layout: base.njk
+---
+
+<h1>{{ editorial.title }}</h1>
+
+<ul class="post-list">
+{% for post in blogger | reverse %}
+  {% if post | matchesEditorial(editorial.keywords) %}
+    {% include "post-card.njk" %}
+  {% endif %}
+{% endfor %}
+</ul>

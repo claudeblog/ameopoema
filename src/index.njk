@@ -7,23 +7,6 @@ title: Ameopoema
 {% for post in blogger | reverse %}
   {% set cover = post.content | firstImage %}
 
-  <li class="post-card">
-    <a href="{{ post.permalink | url }}">
-      
-      {% if cover %}
-        <div class="post-cover">
-          <img src="{{ cover }}" alt="">
-        </div>
-      {% endif %}
-
-      <div class="post-meta">
-        <h2>{{ post.title }}</h2>
-        <time datetime="{{ post.published }}">
-          {{ post.published | date("yyyy-MM-dd") }}
-        </time>
-      </div>
-
-    </a>
-  </li>
+  {% include "post-card.njk" %}
 {% endfor %}
 </ul>
