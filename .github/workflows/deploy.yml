@@ -43,36 +43,6 @@ jobs:
       - name: Disable Jekyll
         run: touch _site/.nojekyll
 
-      # 7. Backup gh-pages
-      - name: Backup site if changed
-        run: |
-          cd _site
-          git init
-          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git fetch origin backup-gh-pages --depth=1 || true
-          git checkout -b backup-gh-pages origin/backup-gh-pages || git checkout -b backup-gh-pages
-
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-
-             # Puxa apenas se houver upstream
-          if git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1; then
-            git pull --ff-only
-          fi
-
-          git add -A
-          if git diff-index --quiet HEAD --; then
-            echo "Nenhuma mudança detectada, pulando backup."
-          else
-            git commit -m "Backup incremental do site - $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
-            
-            # Tag única
-            TAG_NAME="backup-$(date -u +'%Y%m%d%H%M%S')"
-            git tag $TAG_NAME || echo "Tag já existe"
-
-            # Push commit + tag
-            git push origin backup-gh-pages --tags
-          fi
 
       # 8. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
