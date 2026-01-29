@@ -83,7 +83,8 @@ module.exports = async function () {
 
         const filename = hashFilename(imageUrl);
         const localPath = path.join(postImageDir, filename);
-        const publicPath = `images/posts/${slug}/${filename}`;
+        const pathPrefix = process.env.ELEVENTY_PATH_PREFIX || "";
+        const publicPath = `${pathPrefix}/images/posts/${slug}/${filename}`;
 
         if (!fs.existsSync(localPath)) {
           await downloadImage(imageUrl, localPath);
@@ -94,7 +95,10 @@ module.exports = async function () {
 
       return {
         id: item.guid || item.link,
-        title: item.title,
+        title:
+          typeof item.title === "string"
+            ? item.title
+            : item.title?.value || item.title?._ || "",
         content,
         published: publishedDate,
         updated: item.isoDate
