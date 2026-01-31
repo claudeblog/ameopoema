@@ -29,7 +29,7 @@ jobs:
       # 3. Install dependencies
       - run: npm ci
 
-      # 4. Clean build: apaga _site antes do build
+      # 4. Clean build
       - name: Clean _site
         run: rm -rf _site/*
 
