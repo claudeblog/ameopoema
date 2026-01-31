@@ -43,6 +43,10 @@ jobs:
       - name: Disable Jekyll
         run: touch _site/.nojekyll
 
+    # 7. Force rebuild marker
+      - name: Force Pages rebuild
+        run: |
+          date -u +"%Y-%m-%d %H:%M:%S UTC" > _site/.last-build
 
       # 8. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
