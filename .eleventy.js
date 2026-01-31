@@ -80,7 +80,7 @@ module.exports = function (eleventyConfig) {
   });
 
   return {
-    pathPrefix: process.env.ELEVENTY_PATH_PREFIX || "/",
+    pathPrefix: "/",
     dir: {
       input: "src",
       includes: "_includes",

@@ -83,7 +83,7 @@ module.exports = async function () {
 
         const filename = hashFilename(imageUrl);
         const localPath = path.join(postImageDir, filename);
-        const pathPrefix = process.env.ELEVENTY_PATH_PREFIX || "";
+        const pathPrefix = "";
         const publicPath = `${pathPrefix}/images/posts/${slug}/${filename}`;
 
         if (!fs.existsSync(localPath)) {

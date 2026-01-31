@@ -35,8 +35,6 @@ jobs:
       # 5. Build Eleventy site
       - name: Build Eleventy
         run: npm run build
-        env:
-          ELEVENTY_PATH_PREFIX: /
 
       # 6. Disable Jekyll
       - name: Disable Jekyll
