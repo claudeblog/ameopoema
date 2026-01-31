@@ -36,7 +36,7 @@ jobs:
       - name: Build Eleventy
         run: npm run build
         env:
-          ELEVENTY_PATH_PREFIX: /ameopoema/
+          ELEVENTY_PATH_PREFIX: /
 
       # 6. Disable Jekyll
       - name: Disable Jekyll

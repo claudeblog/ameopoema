@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "ELEVENTY_PATH_PREFIX=/ameopoema eleventy",
+    "build": "ELEVENTY_PATH_PREFIX=/ eleventy",
     "dev": "eleventy --serve"
   },
   "dependencies": {
