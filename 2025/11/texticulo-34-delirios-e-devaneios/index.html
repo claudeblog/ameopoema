@@ -1,47 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Textículo 34 - Delírios e Devaneios</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" href="/favicon.ico">
-</head>
-
-<body>
-
-<header class="site-header">
-  <nav class="nav">
-    <div class="nav-inner">
-
-      <!-- toggle invisível -->
-      <input type="checkbox" id="nav-toggle" class="nav-toggle">
-
-      <!-- burger -->
-      <label for="nav-toggle" class="nav-burger" aria-label="Abrir menu">
-        ☰
-      </label>
-
-      <!-- título -->
-      <a href="/" class="site-title">
-        ameopoema
-      </a>
-
-      <!-- links -->
-      <ul class="nav-links">
-            <li><a href="/">Início</a></li>
-            <li><a href="/haicais/">Haicais</a></li>
-            <li><a href="/poesias/">Poesias</a></li>
-            <li><a href="/textos/">Textos</a></li>
-            <li><a href="/print/">Livros</a></li>
-      </ul>
-
+  <head>
+    <meta charset="UTF-8">
+    <title>Textículo 34 - Delírios e Devaneios</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/favicon.ico">
+    <style>
+      /* Gate */
+      #gate {
+        position: fixed;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.96);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      #gate form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+      #gate input {
+        font-size: 1.1rem;
+        padding: 0.6rem 0.8rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        min-width: 220px;
+      }
+      #gate button {
+        font-size: 0.9rem;
+        padding: 0.4rem 1rem;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        background: #111;
+        color: white;
+      }
+      #gate button:hover {
+        opacity: 0.85;
+      }
+      /* Esconde links enquanto bloqueado */
+      body.locked .nav-links,
+      body.locked .nav-burger {
+        display: none;
+      }
+      /* Evita scroll antes de liberar */
+      body.locked {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body class="locked">
+    <header class="site-header">
+      <nav class="nav">
+        <div
+          class="nav-inner">
+          <!-- toggle invisível -->
+          <input
+          type="checkbox" id="nav-toggle" class="nav-toggle">
+          <!-- burger -->
+          <label for="nav-toggle" class="nav-burger" aria-label="Abrir menu">
+            ☰
+          </label>
+          <!-- título (sempre visível) -->
+          <a href="/" class="site-title">
+            ameopoema
+          </a>
+          <!-- links -->
+          <ul class="nav-links">
+            <li>
+              <a href="/">Início</a>
+            </li>
+            <li>
+              <a href="/haicais/">Haicais</a>
+            </li>
+            <li>
+              <a href="/poesias/">Poesias</a>
+            </li>
+            <li>
+              <a href="/textos/">Textos</a>
+            </li>
+            <li>
+              <a href="/print/">Livros</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- GATE -->
+    <div id="gate">
+      <form onsubmit="check(event)">
+        <input type="password" id="password" placeholder="Digite a senha" autofocus>
+        <button type="submit">entrar</button>
+      </form>
     </div>
-  </nav>
-</header>
-
-<main class="site-main">
-  
+    <main class="site-main">
+      
 <article>
   <h1>Textículo 34 - Delírios e Devaneios
     <time datetime="Tue Nov 25 2025 21:29:48 GMT+0000 (Coordinated Universal Time)">25/11/2025</time>
@@ -49,11 +106,38 @@
   <p></p>
   O destino age sobre o que sabemos.&nbsp;<div><br></div><div><br></div><div>Se somos pretensamente livres para fazer o que quisermos, mas apenas podemos querer aquilo que conhecemos.&nbsp;</div><div><br></div><div>Nosso querer é fruto do nosso conhecimento e das informações que temos no momento em que decidimos querer algo.&nbsp;</div><div><br></div><div>Uma vez possuídos pelo conhecimento, estamos destinados a decidir desejar ou não desejar, o que quer que desejaríamos, se conhecessemos o que, por então, tornaria-se fruto do nosso desejo.</div><div><br></div><div>O livre arbítrio, ou Liber arbitrium, atribui à nossa racionalidade e emoções a capacidade de julgar e decidir qual caminho seguir. A liberdade de escolher.</div><div><br></div><div>No entanto, neste tribunal, só podemos julgar os réus que nos são fornecidos e escolher com base nos fatos, autos e informações que temos, decisões racionais, emocionais e límbicas.</div><div><br></div><div>Somos livres para escolher entre o que desejamos, mas não para escolher desejar o que desejamos.</div><div><br></div><div>Estamos fadados a cumprir o destino ao qual nosso livre arbítrio nos condena. Desejar o que desejariamos, caso a nós fosse fornecida uma escolha.</div><div><br></div><div>Somos incapazes de fazer o que não faríamos e de agir de forma contrária ao nosso destino, pois não podemos agir contra a nossa vontade ou desejo de escolher...</div><div><br></div><div>A não ser por meio de delírio....</div><div><br></div><div>Á insanidade, é resguardada a única possibilidade de agir de forma livre do destino, de forma apartada do livre arbítrio.</div><div><br></div><div>Delírio é a incapacidade do ser em agir conforme sua vontade ou desejo, seu conhecimento e razão, sua emoção e seu estado.</div><div><br></div><div>Portanto, é na via do delírio que se encontra o espaço único em caminho para contrariar o destino preposto pelo conhecimento e momento.</div><div><br></div><div>Ao adicionar a insanidade à equação, o destino torna-se impotente ante a real aleatoriedade.&nbsp;</div><div><br></div><div>A irrazão, não um sinonimo de emoção, é, por definição, a única que pode nos fazer agir de forma separada ao nosso conhecimento, desejo e à maldição do saber.</div><div><br></div><div>Torna-se unica capaz de alterar o caminho imposto pelo destino.</div><div><br></div><div>Destino ao qual com nossas escolhas nos destinaríamos.</div><div><br></div><div>Delire-se e delicie-se.</div><div><br></div><div>Bora viver.</div><div><br></div><div>- Devaneios e delírios inspirados nas series Sandman e Dark da Netflix.</div>
 </article>
-</main>
-
-<footer class="site-footer">
-  <p> © 2026 Ameopoema </p>
-</footer>
-
-</body>
+    </main>
+    <footer class="site-footer">
+      <p id="esquecer" onclick="forget()">
+        © 2026 Ameopoema
+      </p>
+    </footer>
+    <script>
+      const PASSWORD = "insegura";
+      if (localStorage.getItem("access") === "ok") 
+        unlock();
+      
+      function check(event) {
+        event.preventDefault();
+        if (document.getElementById("password").value === PASSWORD) {
+          localStorage.setItem("access", "ok");
+          unlock();
+        }
+      }
+      function unlock() {
+        document
+          .getElementById("gate")
+          .style
+          .display = "none";
+        document
+          .body
+          .classList
+          .remove("locked");
+      }
+      function forget() {
+        localStorage.removeItem("access");
+        location.reload();
+      }
+    </script>
+  </body>
 </html>

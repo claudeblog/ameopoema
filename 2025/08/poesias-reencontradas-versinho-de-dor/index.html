@@ -1,47 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Poesias reencontradas: Versinho de Dor</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" href="/favicon.ico">
-</head>
-
-<body>
-
-<header class="site-header">
-  <nav class="nav">
-    <div class="nav-inner">
-
-      <!-- toggle invisível -->
-      <input type="checkbox" id="nav-toggle" class="nav-toggle">
-
-      <!-- burger -->
-      <label for="nav-toggle" class="nav-burger" aria-label="Abrir menu">
-        ☰
-      </label>
-
-      <!-- título -->
-      <a href="/" class="site-title">
-        ameopoema
-      </a>
-
-      <!-- links -->
-      <ul class="nav-links">
-            <li><a href="/">Início</a></li>
-            <li><a href="/haicais/">Haicais</a></li>
-            <li><a href="/poesias/">Poesias</a></li>
-            <li><a href="/textos/">Textos</a></li>
-            <li><a href="/print/">Livros</a></li>
-      </ul>
-
+  <head>
+    <meta charset="UTF-8">
+    <title>Poesias reencontradas: Versinho de Dor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/favicon.ico">
+    <style>
+      /* Gate */
+      #gate {
+        position: fixed;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.96);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      #gate form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+      #gate input {
+        font-size: 1.1rem;
+        padding: 0.6rem 0.8rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        min-width: 220px;
+      }
+      #gate button {
+        font-size: 0.9rem;
+        padding: 0.4rem 1rem;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        background: #111;
+        color: white;
+      }
+      #gate button:hover {
+        opacity: 0.85;
+      }
+      /* Esconde links enquanto bloqueado */
+      body.locked .nav-links,
+      body.locked .nav-burger {
+        display: none;
+      }
+      /* Evita scroll antes de liberar */
+      body.locked {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body class="locked">
+    <header class="site-header">
+      <nav class="nav">
+        <div
+          class="nav-inner">
+          <!-- toggle invisível -->
+          <input
+          type="checkbox" id="nav-toggle" class="nav-toggle">
+          <!-- burger -->
+          <label for="nav-toggle" class="nav-burger" aria-label="Abrir menu">
+            ☰
+          </label>
+          <!-- título (sempre visível) -->
+          <a href="/" class="site-title">
+            ameopoema
+          </a>
+          <!-- links -->
+          <ul class="nav-links">
+            <li>
+              <a href="/">Início</a>
+            </li>
+            <li>
+              <a href="/haicais/">Haicais</a>
+            </li>
+            <li>
+              <a href="/poesias/">Poesias</a>
+            </li>
+            <li>
+              <a href="/textos/">Textos</a>
+            </li>
+            <li>
+              <a href="/print/">Livros</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- GATE -->
+    <div id="gate">
+      <form onsubmit="check(event)">
+        <input type="password" id="password" placeholder="Digite a senha" autofocus>
+        <button type="submit">entrar</button>
+      </form>
     </div>
-  </nav>
-</header>
-
-<main class="site-main">
-  
+    <main class="site-main">
+      
 <article>
   <h1>Poesias reencontradas: Versinho de Dor
     <time datetime="Mon Aug 04 2025 15:00:00 GMT+0000 (Coordinated Universal Time)">04/08/2025</time>
@@ -49,11 +106,38 @@
   <p></p>
   Construo com quem está disposto comigo a desbravar a selva das emoções.<div><br /></div><div>Tem a coragem de lidar com o difícil das intempéries das relações.</div><div><br /></div><div>Construo afetos e amizades difíceis com honestidade e sobriedade.&nbsp;</div><div><br /></div><div>Nos momentos da vida mais delicados a empatia encontra a verdade.&nbsp;</div><div><br /></div><div>Construo com ética e conexão, ajuda mutua, apoio, acalento.</div><div><br /></div><div>Não deixo pra vida o que é meu papel, não deixo afetos pro sopro do vento.</div><div><br /></div><div>Mensagem é meio, é letra e é tempo, é tudo destaque a dispor do autor.</div><div><br /></div><div>Esgotei minha voz de empatia e respeito á implorar o olhar do agressor.</div>
 </article>
-</main>
-
-<footer class="site-footer">
-  <p> © 2026 Ameopoema </p>
-</footer>
-
-</body>
+    </main>
+    <footer class="site-footer">
+      <p id="esquecer" onclick="forget()">
+        © 2026 Ameopoema
+      </p>
+    </footer>
+    <script>
+      const PASSWORD = "insegura";
+      if (localStorage.getItem("access") === "ok") 
+        unlock();
+      
+      function check(event) {
+        event.preventDefault();
+        if (document.getElementById("password").value === PASSWORD) {
+          localStorage.setItem("access", "ok");
+          unlock();
+        }
+      }
+      function unlock() {
+        document
+          .getElementById("gate")
+          .style
+          .display = "none";
+        document
+          .body
+          .classList
+          .remove("locked");
+      }
+      function forget() {
+        localStorage.removeItem("access");
+        location.reload();
+      }
+    </script>
+  </body>
 </html>

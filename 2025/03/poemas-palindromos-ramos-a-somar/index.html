@@ -1,47 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Poemas Palíndromos: Ramos a somar</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" href="/favicon.ico">
-</head>
-
-<body>
-
-<header class="site-header">
-  <nav class="nav">
-    <div class="nav-inner">
-
-      <!-- toggle invisível -->
-      <input type="checkbox" id="nav-toggle" class="nav-toggle">
-
-      <!-- burger -->
-      <label for="nav-toggle" class="nav-burger" aria-label="Abrir menu">
-        ☰
-      </label>
-
-      <!-- título -->
-      <a href="/" class="site-title">
-        ameopoema
-      </a>
-
-      <!-- links -->
-      <ul class="nav-links">
-            <li><a href="/">Início</a></li>
-            <li><a href="/haicais/">Haicais</a></li>
-            <li><a href="/poesias/">Poesias</a></li>
-            <li><a href="/textos/">Textos</a></li>
-            <li><a href="/print/">Livros</a></li>
-      </ul>
-
+  <head>
+    <meta charset="UTF-8">
+    <title>Poemas Palíndromos: Ramos a somar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/favicon.ico">
+    <style>
+      /* Gate */
+      #gate {
+        position: fixed;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.96);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      #gate form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+      #gate input {
+        font-size: 1.1rem;
+        padding: 0.6rem 0.8rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        min-width: 220px;
+      }
+      #gate button {
+        font-size: 0.9rem;
+        padding: 0.4rem 1rem;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        background: #111;
+        color: white;
+      }
+      #gate button:hover {
+        opacity: 0.85;
+      }
+      /* Esconde links enquanto bloqueado */
+      body.locked .nav-links,
+      body.locked .nav-burger {
+        display: none;
+      }
+      /* Evita scroll antes de liberar */
+      body.locked {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body class="locked">
+    <header class="site-header">
+      <nav class="nav">
+        <div
+          class="nav-inner">
+          <!-- toggle invisível -->
+          <input
+          type="checkbox" id="nav-toggle" class="nav-toggle">
+          <!-- burger -->
+          <label for="nav-toggle" class="nav-burger" aria-label="Abrir menu">
+            ☰
+          </label>
+          <!-- título (sempre visível) -->
+          <a href="/" class="site-title">
+            ameopoema
+          </a>
+          <!-- links -->
+          <ul class="nav-links">
+            <li>
+              <a href="/">Início</a>
+            </li>
+            <li>
+              <a href="/haicais/">Haicais</a>
+            </li>
+            <li>
+              <a href="/poesias/">Poesias</a>
+            </li>
+            <li>
+              <a href="/textos/">Textos</a>
+            </li>
+            <li>
+              <a href="/print/">Livros</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- GATE -->
+    <div id="gate">
+      <form onsubmit="check(event)">
+        <input type="password" id="password" placeholder="Digite a senha" autofocus>
+        <button type="submit">entrar</button>
+      </form>
     </div>
-  </nav>
-</header>
-
-<main class="site-main">
-  
+    <main class="site-main">
+      
 <article>
   <h1>Poemas Palíndromos: Ramos a somar
     <time datetime="Mon Mar 03 2025 09:00:00 GMT+0000 (Coordinated Universal Time)">03/03/2025</time>
@@ -49,11 +106,38 @@
   <p></p>
   <div>É fã, reter e ter a fé</div><div>Amora e aroma</div><div>Romã é amor&nbsp;</div><div><br /></div><div>Arreta a terra</div><div>Ara, para</div><div>O dia caído&nbsp;</div><div>Lê mel</div><div><br /></div><div>É o eu que o é</div><div>Rola calor</div><div>Roda a dor</div><div>Eco você, eco você</div><div><br /></div><div>Em amar rede derrama-me</div><div><br /></div><div>Eco você, eco você&nbsp;</div><div>Roda a dor</div><div>Rola calor&nbsp;</div><div>É o eu que o é</div><div><br /></div><div>Lê mel</div><div>O dia caído&nbsp;</div><div>Ara, para</div><div>Arreta a terra</div><div><br /></div><div>Romã é amor</div><div>Amora e aroma&nbsp;</div><div>É fã, reter e ter a fé&nbsp;</div><div><br /></div><div>Ramos a somar</div><div><br /></div><div><br /></div><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhThD-h3vfdzwU6fJv9jXoM6fmpNkrM-sraiKUVfAB1qYjOIERhJ70KRFXwGGCmfFazYZqCrIgtHV_DvjGb2TfQR_Y9hci2FvYsoae6vUCqHpnu_sov4IynezMQIRhdIShutuTet2p7yCIUaIL9e4h97WRFeSYxGcKfxJmKp4IvwpbuVDxg2XlfElLm5zo/s5575/pexels-minan1398-1654255.jpg" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="5575" data-original-width="3144" height="200" src="/images/posts/poemas-palindromos-ramos-a-somar/cbcdd25e29ae20e6a551958f3937c6a8.jpg" width="113" /></a></div><br /><div><br /></div>
 </article>
-</main>
-
-<footer class="site-footer">
-  <p> © 2026 Ameopoema </p>
-</footer>
-
-</body>
+    </main>
+    <footer class="site-footer">
+      <p id="esquecer" onclick="forget()">
+        © 2026 Ameopoema
+      </p>
+    </footer>
+    <script>
+      const PASSWORD = "insegura";
+      if (localStorage.getItem("access") === "ok") 
+        unlock();
+      
+      function check(event) {
+        event.preventDefault();
+        if (document.getElementById("password").value === PASSWORD) {
+          localStorage.setItem("access", "ok");
+          unlock();
+        }
+      }
+      function unlock() {
+        document
+          .getElementById("gate")
+          .style
+          .display = "none";
+        document
+          .body
+          .classList
+          .remove("locked");
+      }
+      function forget() {
+        localStorage.removeItem("access");
+        location.reload();
+      }
+    </script>
+  </body>
 </html>
