@@ -803,7 +803,9 @@
 
     </main>
     <footer class="site-footer">
-      <p>© 2026 Ameopoema</p>
+      <p id="reset-storage">
+        © 2026 Ameopoema
+      </p>
     </footer>
     <script>
       const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLScItpjJxsc4GOYWayWwVU-CEyxrwA_7FQtRDO_9ZB1r8rh-0w/formResponse";
@@ -914,7 +916,8 @@
         e.preventDefault();
         if (!sessionStorage.getItem(SESSION_KEY)) 
           return;
-         // só abre se já enviou
+        
+        // só abre se já enviou
         document
           .getElementById("gate")
           .style
@@ -945,6 +948,21 @@
           .replace(/"/g, "&quot;")
           .replace(/'/g, "&#039;");
       }
+      const resetBtn = document.getElementById("reset-storage");
+      resetBtn.addEventListener("click", () => {
+        localStorage.removeItem(STORAGE_KEY);
+        sessionStorage.removeItem(SESSION_KEY);
+        // abre o gate
+        document
+          .getElementById("gate")
+          .style
+          .display = "flex";
+        document
+          .body
+          .classList
+          .add("locked");
+        cancelBtn.style.display = "none"; // botão cancelar não aparece na primeira mensagem
+      });
     </script>
   </body>
 </html>
