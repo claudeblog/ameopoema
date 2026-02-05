@@ -838,7 +838,7 @@
         const email = get("email");
         const message = get("message");
         if (! name || ! email || ! message) 
-          return showWait("Todos os campos precisam ser preenchidos.");
+          return showWait("Todos os campos precisam ser preenchidos. <br>Deixe sua mensagem. <br> Nos conte, você é um robô?");
         
         if (!validEmail(email)) 
           return showWait("O email não parece válido.");
