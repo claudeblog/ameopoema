@@ -797,11 +797,17 @@
 
   const MIN_INTERVAL = 60 * 1000;
   const STORAGE_KEY = "ameopoema_last_submit";
+  const SESSION_KEY = "ameopoema_unlocked";
 
   const waitBox = document.getElementById("wait-message");
   const waitText = waitBox.querySelector(".wait-text");
 
   const spamWords = ["viagra","bitcoin","crypto","casino","ganhe dinheiro","free money","porn"];
+
+  // 🔓 Se já desbloqueou nessa sessão, abre direto
+  if (sessionStorage.getItem(SESSION_KEY)) {
+    unlock();
+  }
 
   document.getElementById("gate-form").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -850,6 +856,8 @@
     document.body.removeChild(form);
 
     localStorage.setItem(STORAGE_KEY, now.toString());
+    sessionStorage.setItem(SESSION_KEY, "1"); // 🔐 marca sessão
+
     unlock();
   });
 
