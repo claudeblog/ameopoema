@@ -1,104 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8">
-    <title>Poemas Palíndromo: Eu quê?</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="icon" href="/favicon.ico">
-    <style>
-      /* Gate */
-      #gate {
-        position: fixed;
-        inset: 0;
-        background: rgba(255, 255, 255, 0.96);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-      }
-      #gate form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-      }
-      #gate input {
-        font-size: 1.1rem;
-        padding: 0.6rem 0.8rem;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        min-width: 220px;
-      }
-      #gate button {
-        font-size: 0.9rem;
-        padding: 0.4rem 1rem;
-        border: none;
-        border-radius: 999px;
-        cursor: pointer;
-        background: #111;
-        color: white;
-      }
-      #gate button:hover {
-        opacity: 0.85;
-      }
-      /* Esconde links enquanto bloqueado */
-      body.locked .nav-links,
-      body.locked .nav-burger {
-        display: none;
-      }
-      /* Evita scroll antes de liberar */
-      body.locked {
-        overflow: hidden;
-      }
-    </style>
-  </head>
-  <body class="locked">
-    <header class="site-header">
-      <nav class="nav">
-        <div
-          class="nav-inner">
-          <!-- toggle invisível -->
-          <input
-          type="checkbox" id="nav-toggle" class="nav-toggle">
-          <!-- burger -->
-          <label for="nav-toggle" class="nav-burger" aria-label="Abrir menu">
-            ☰
-          </label>
-          <!-- título (sempre visível) -->
-          <a href="/" class="site-title">
-            ameopoema
-          </a>
-          <!-- links -->
-          <ul class="nav-links">
-            <li>
-              <a href="/">Início</a>
-            </li>
-            <li>
-              <a href="/haicais/">Haicais</a>
-            </li>
-            <li>
-              <a href="/poesias/">Poesias</a>
-            </li>
-            <li>
-              <a href="/textos/">Textos</a>
-            </li>
-            <li>
-              <a href="/print/">Livros</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <!-- GATE -->
-    <div id="gate">
-      <form onsubmit="check(event)">
-        <input type="password" id="password" placeholder="Digite a senha" autofocus>
-        <button type="submit">entrar</button>
-      </form>
+<head>
+  <meta charset="UTF-8">
+  <title>Poemas Palíndromo: Eu quê?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    body.locked { overflow: hidden; }
+    body.locked .nav-links,
+    body.locked .nav-burger { display: none; }
+
+    #gate {
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.97);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #gate form {
+      max-width: 420px;
+      width: 100%;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    #gate h1 { text-align: center; font-weight: normal; }
+    #gate p { text-align: center; font-size: 0.9rem; opacity: 0.8; }
+
+    #gate input,
+    #gate textarea {
+      font-size: 1rem;
+      padding: 0.6rem;
+      width: 100%;
+    }
+
+    #gate button {
+      background: #111;
+      color: #fff;
+      border: none;
+      padding: 0.6rem;
+      cursor: pointer;
+    }
+
+    #wait-message {
+      font-size: 0.85rem;
+      text-align: center;
+      color: #555;
+      display: none;
+    }
+  </style>
+</head>
+
+<body class="locked">
+
+<header class="site-header">
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="site-title">ameopoema</a>
+      <ul class="nav-links">
+        <li><a href="/">Início</a></li>
+        <li><a href="/haicais/">Haicais</a></li>
+        <li><a href="/poesias/">Poesias</a></li>
+        <li><a href="/textos/">Textos</a></li>
+        <li><a href="/print/">Livros</a></li>
+        <li><a href="#" onclick="openGate(event)">Contato</a></li>
+      </ul>
     </div>
-    <main class="site-main">
-      
+  </nav>
+</header>
+
+<div id="gate">
+  <form id="gate-form" novalidate>
+    <h1 class="site-title">ameopoema</h1>
+    <p>Palavras abrem portas. Deixe sua mensagem :)</p>
+
+    <input type="text" id="name" placeholder="Seu nome">
+    <input type="email" id="email" placeholder="Seu email">
+    <textarea id="message" rows="5" placeholder="Escreva algo para entrar"></textarea>
+
+    <input type="text" id="website" style="display:none">
+
+    <button type="submit">Entrar</button>
+
+    <div id="wait-message">
+      <p class="wait-text"></p>
+    </div>
+
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+  </form>
+</div>
+
+<main class="site-main">
+  
 <article>
   <h1>Poemas Palíndromo: Eu quê?
     <time datetime="Wed Apr 02 2025 02:57:00 GMT+0000 (Coordinated Universal Time)">02/04/2025</time>
@@ -106,38 +105,120 @@
   <p></p>
   <div>Eu que revivo o viver</div><div>Eu que ouso, suo</div><div>Eu, que eco você (eco você)</div><div>Eu que revivo o viver</div><div><br /></div><div>Eu que</div><div><br /></div><div>Adoraria ir, a rodar e ter</div><div>E medo pode me reter?</div><div>Adoraria ir a roda...</div><div><br /></div><div>Eu, que revivo o viver</div><div>Eu, que eco você (eco você)</div><div>Eu que ouso, suo.</div><div>Eu que revivo o viver</div><div><br /></div><div>Eu quê?...</div>
 </article>
-    </main>
-    <footer class="site-footer">
-      <p id="esquecer" onclick="forget()">
-        © 2026 Ameopoema
-      </p>
-    </footer>
-    <script>
-      const PASSWORD = "insegura";
-      if (localStorage.getItem("access") === "ok") 
-        unlock();
-      
-      function check(event) {
-        event.preventDefault();
-        if (document.getElementById("password").value === PASSWORD) {
-          localStorage.setItem("access", "ok");
-          unlock();
-        }
-      }
-      function unlock() {
-        document
-          .getElementById("gate")
-          .style
-          .display = "none";
-        document
-          .body
-          .classList
-          .remove("locked");
-      }
-      function forget() {
-        localStorage.removeItem("access");
-        location.reload();
-      }
-    </script>
-  </body>
+</main>
+
+<footer class="site-footer">
+  <p>© 2026 Ameopoema</p>
+</footer>
+
+<script>
+  const FORM_ACTION =
+    "https://docs.google.com/forms/d/e/1FAIpQLScItpjJxsc4GOYWayWwVU-CEyxrwA_7FQtRDO_9ZB1r8rh-0w/formResponse";
+
+  const MIN_INTERVAL = 60 * 1000;
+  const STORAGE_KEY = "ameopoema_last_submit";
+
+  const waitBox = document.getElementById("wait-message");
+  const waitText = waitBox.querySelector(".wait-text");
+
+  const spamWords = ["viagra","bitcoin","crypto","casino","ganhe dinheiro","free money","porn"];
+
+  document.getElementById("gate-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    hideWait();
+
+    if (document.getElementById("website").value) return;
+
+    const name = get("name");
+    const email = get("email");
+    const message = get("message");
+
+    if (!name || !email || !message) {
+      return showWait("Todos os campos precisam ser preenchidos.");
+    }
+
+    if (!validEmail(email)) {
+      return showWait("O email não parece válido.");
+    }
+
+    if (looksLikeSpam(message)) {
+      return showWait("Essa mensagem parece automática demais.");
+    }
+
+    const last = localStorage.getItem(STORAGE_KEY);
+    const now = Date.now();
+
+    if (last && now - last < MIN_INTERVAL) {
+      return showWait(
+        "A poesia habita no silêncio entre os versos.<br>Tente novamente daqui a 1 minuto."
+      );
+    }
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = FORM_ACTION;
+    form.target = "hidden_iframe";
+
+    form.innerHTML = `
+      <input type="hidden" name="entry.409672853" value="${escapeHTML(name)}">
+      <input type="hidden" name="entry.2040541815" value="${escapeHTML(email)}">
+      <input type="hidden" name="entry.739396940" value="${escapeHTML(message)}">
+    `;
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+
+    localStorage.setItem(STORAGE_KEY, now.toString());
+    unlock();
+  });
+
+  function get(id) {
+    return document.getElementById(id).value.trim();
+  }
+
+  function validEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+  }
+
+  function looksLikeSpam(text) {
+    if (text.length < 8) return true;
+    if ((text.match(/https?:\/\//g) || []).length > 2) return true;
+    if (/([a-zA-Z])\1{7,}/.test(text)) return true;
+
+    const lower = text.toLowerCase();
+    return spamWords.some(w => lower.includes(w));
+  }
+
+  function showWait(msg) {
+    waitText.innerHTML = msg;
+    waitBox.style.display = "block";
+  }
+
+  function hideWait() {
+    waitBox.style.display = "none";
+  }
+
+  function unlock() {
+    document.getElementById("gate").style.display = "none";
+    document.body.classList.remove("locked");
+  }
+
+  function openGate(e) {
+    e.preventDefault();
+    document.getElementById("gate").style.display = "flex";
+    document.body.classList.add("locked");
+  }
+
+  function escapeHTML(str) {
+    return str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+</script>
+
+</body>
 </html>
