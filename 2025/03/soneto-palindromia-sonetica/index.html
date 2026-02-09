@@ -135,7 +135,7 @@
       const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLScItpjJxsc4GOYWayWwVU-CEyxrwA_7FQtRDO_9ZB1r8rh-0w/formResponse";
       const MIN_INTERVAL = 60 * 1000;
       const STORAGE_KEY = "ameopoema_last_submit";
-      const SESSION_KEY = "ameopoema_unlocked";
+      const SESSION_COOKIE = "ameopoema_unlocked";
       const waitBox = document.getElementById("wait-message");
       const waitText = waitBox.querySelector(".wait-text");
       const cancelBtn = document.getElementById("cancel-btn");
@@ -148,8 +148,8 @@
         "free money",
         "porn"
       ];
-      // Se já desbloqueou nesta sessão, abre direto
-      if (sessionStorage.getItem(SESSION_KEY)) {
+
+      if (hasSessionUnlock()) {
         unlock();
       }
       document.getElementById("gate-form").addEventListener("submit", function (e) {
@@ -194,7 +194,7 @@
         form.submit();
         document.body.removeChild(form);
         localStorage.setItem(STORAGE_KEY, now.toString());
-        sessionStorage.setItem(SESSION_KEY, "1"); // marca sessão
+        setSessionUnlock();
         unlock();
       });
       function get(id) {
@@ -238,10 +238,10 @@
       }
       function openGate(e) {
         e.preventDefault();
-        if (!sessionStorage.getItem(SESSION_KEY)) 
+        if (!hasSessionUnlock()) 
           return;
         
-        // só abre se já enviou
+
         document
           .getElementById("gate")
           .style
@@ -250,7 +250,7 @@
           .body
           .classList
           .add("locked");
-        cancelBtn.style.display = "block"; // mostra botão cancelar
+        cancelBtn.style.display = "block";
       }
       function cancelGate() {
         document
@@ -262,7 +262,7 @@
           .classList
           .remove("locked");
         cancelBtn.style.display = "none";
-        window.location.href = "/"; // volta para home
+        window.location.href = "/";
       }
       function escapeHTML(str) {
         return str
@@ -272,11 +272,23 @@
           .replace(/"/g, "&quot;")
           .replace(/'/g, "&#039;");
       }
+      function hasSessionUnlock() {
+        return document.cookie
+          .split(";")
+          .map(cookie => cookie.trim())
+          .some(cookie => cookie === `${SESSION_COOKIE}=1`);
+      }
+      function setSessionUnlock() {
+        document.cookie = `${SESSION_COOKIE}=1; path=/; SameSite=Lax`;
+      }
+      function clearSessionUnlock() {
+        document.cookie = `${SESSION_COOKIE}=; path=/; Max-Age=0; SameSite=Lax`;
+      }
       const resetBtn = document.getElementById("reset-storage");
       resetBtn.addEventListener("click", () => {
         localStorage.removeItem(STORAGE_KEY);
-        sessionStorage.removeItem(SESSION_KEY);
-        // abre o gate
+        clearSessionUnlock();
+
         document
           .getElementById("gate")
           .style
@@ -285,7 +297,7 @@
           .body
           .classList
           .add("locked");
-        cancelBtn.style.display = "none"; // botão cancelar não aparece na primeira mensagem
+        cancelBtn.style.display = "none";
       });
     </script>
   </body>
