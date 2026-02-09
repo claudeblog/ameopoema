@@ -5,125 +5,90 @@
     <title>Ameopoema</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/style.css">
-    <style>
-      body.locked {
-        overflow: hidden;
-      }
-      body.locked .nav-links,
-      body.locked .nav-burger {
-        display: none;
-      }
-      #gate {
-        position: fixed;
-        inset: 0;
-        background: rgba(255, 255, 255, 0.97);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-      }
-      #gate form {
-        max-width: 420px;
-        width: 100%;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        position: relative;
-      }
-      #gate h1 {
-        text-align: center;
-        font-weight: normal;
-      }
-      #gate p {
-        text-align: center;
-        font-size: 0.9rem;
-        opacity: 0.8;
-      }
-      #gate input,
-      #gate textarea {
-        font-size: 1rem;
-        padding: 0.6rem;
-        width: 100%;
-      }
-      #gate button {
-        background: #111;
-        color: #fff;
-        border: none;
-        padding: 0.6rem;
-        cursor: pointer;
-      }
-      #cancel-btn {
-        background: transparent;
-        color: #111;
-        border: 1px solid #111;
-        margin-top: 0.5rem;
-        cursor: pointer;
-      }
-      #wait-message {
-        font-size: 0.85rem;
-        text-align: center;
-        color: #555;
-        display: none;
-      }
-    </style>
+    <link rel="stylesheet" href="/css/gate.css">
   </head>
+
   <body class="locked">
     <header class="site-header">
-      <nav class="nav">
-        <div class="nav-inner">
-          <a href="/" class="site-title">ameopoema</a>
-          <ul class="nav-links">
-            <li>
-              <a href="/">Início</a>
-            </li>
-            <li>
-              <a href="/haicais/">Haicais</a>
-            </li>
-            <li>
-              <a href="/poesias/">Poesias</a>
-            </li>
-            <li>
-              <a href="/textos/">Textos</a>
-            </li>
-            <li>
-              <a href="/print/">Livros</a>
-            </li>
-            <li>
-              <a href="#" onclick="openGate(event)">Contato</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <nav class="nav" aria-label="Navegação principal">
+  <div class="nav-inner">
+    <input id="nav-toggle" class="nav-toggle" type="checkbox">
+    <label for="nav-toggle" class="nav-burger" aria-label="Abrir menu">☰</label>
+    <a href="/" class="site-title">ameopoema</a>
+
+    <ul class="nav-links">
+      
+        <li>
+          <a href="/">Início</a>
+        </li>
+      
+        <li>
+          <a href="/haicais/">Haicais</a>
+        </li>
+      
+        <li>
+          <a href="/poesias/">Poesias</a>
+        </li>
+      
+        <li>
+          <a href="/textos/">Textos</a>
+        </li>
+      
+        <li>
+          <a href="/print/">Livros</a>
+        </li>
+      
+      <li>
+        <a href="#" data-open-gate>Contato</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
     </header>
-    <div id="gate">
-      <form id="gate-form" novalidate>
-        <h1 class="site-title">ameopoema</h1>
-        <p>Palavras abrem portas. Deixe sua mensagem :)</p>
-        <input type="text" id="name" placeholder="Seu nome">
-        <input type="email" id="email" placeholder="Seu email">
-        <textarea id="message" rows="5" placeholder="Escreva algo para entrar"></textarea>
-        <input type="text" id="website" style="display:none">
-        <button type="submit">Entrar</button>
-        <button id="cancel-btn" type="button" style="display:none" onclick="cancelGate()">Cancelar</button>
-        <div id="wait-message">
-          <p class="wait-text"></p>
-        </div>
-        <iframe name="hidden_iframe" style="display:none;"></iframe>
-      </form>
+
+    <div
+  id="gate"
+  data-form-action="https://docs.google.com/forms/d/e/1FAIpQLScItpjJxsc4GOYWayWwVU-CEyxrwA_7FQtRDO_9ZB1r8rh-0w/formResponse"
+  data-min-interval-ms="60000"
+  data-storage-key="ameopoema_last_submit"
+  data-session-cookie="ameopoema_unlocked"
+>
+  <form id="gate-form" novalidate>
+    <h1 class="site-title">ameopoema</h1>
+    <p>Palavras abrem portas. Deixe sua mensagem :)</p>
+
+    <input type="text" id="name" placeholder="Seu nome">
+    <input type="email" id="email" placeholder="Seu email">
+    <textarea id="message" rows="5" placeholder="Escreva algo para entrar"></textarea>
+    <input type="text" id="website" class="gate-honeypot" tabindex="-1" autocomplete="off">
+
+    <button type="submit">Entrar</button>
+    <button id="cancel-btn" type="button" class="gate-cancel">Cancelar</button>
+
+    <div id="wait-message" class="gate-wait" aria-live="polite">
+      <p class="wait-text"></p>
     </div>
+
+    <iframe name="hidden_iframe" class="hidden-frame"></iframe>
+  </form>
+</div>
+
+
     <main class="site-main">
       
 <h1>Haicais</h1>
 
+
+
 <ul class="post-list">
-
   
-
+    
   
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/02/575-haicais-46-haicai-de-decalque/">
-
     
 
     <div class="post-meta">
@@ -135,16 +100,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/02/575-haicais-45-haicai-de-maratona/">
-
     
 
     <div class="post-meta">
@@ -156,16 +120,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/02/575-haicais-43-haicai-destoico/">
-
     
 
     <div class="post-meta">
@@ -177,18 +140,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/02/575-haicais-42-haicai-de-desencontro/">
-
     
 
     <div class="post-meta">
@@ -200,16 +162,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/02/574-haicais-41-haicai-fora-do-ar/">
-
     
 
     <div class="post-meta">
@@ -221,16 +182,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/01/575-haicais-40-haicai-nefelibata/">
-
     
 
     <div class="post-meta">
@@ -242,16 +202,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/01/575-haicais-39-haicai-de-rodeio/">
-
     
 
     <div class="post-meta">
@@ -263,16 +222,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/01/575-haicais-38-haicai-de-dia-livre/">
-
     
 
     <div class="post-meta">
@@ -284,16 +242,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/01/575-haicais-37-haicai-de-frustracao/">
-
     
 
     <div class="post-meta">
@@ -305,16 +262,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/01/575-haicais-36-haicai-favela/">
-
     
 
     <div class="post-meta">
@@ -326,16 +282,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/01/575-haicais-35-haicai-dispoente/">
-
     
 
     <div class="post-meta">
@@ -347,16 +302,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/01/575-haicais-34-haicai-de-equilibrio/">
-
     
 
     <div class="post-meta">
@@ -368,18 +322,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/01/575-haicais-33-haicai-de-veto/">
-
     
 
     <div class="post-meta">
@@ -391,18 +344,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/01/575-haicais-32-haicai-revitalizar/">
-
     
 
     <div class="post-meta">
@@ -414,16 +366,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/01/575-haicais-31-haicai-de-acesso/">
-
     
 
     <div class="post-meta">
@@ -435,16 +386,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2026/01/575-haicais-28-haicai-sankofa/">
-
     
 
     <div class="post-meta">
@@ -456,16 +406,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/12/575-haicais-365-haicai-de-fim/">
-
     
 
     <div class="post-meta">
@@ -477,16 +426,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/12/575-haicais-363-haicai-a-vo-nova/">
-
     
 
     <div class="post-meta">
@@ -498,16 +446,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/12/575-haicais-360-haicai-circular/">
-
     
 
     <div class="post-meta">
@@ -519,16 +466,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/12/575-haicais-359-haicai-de-partilha/">
-
     
 
     <div class="post-meta">
@@ -540,16 +486,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/12/575-haicais-358-haicai-de-rigidez/">
-
     
 
     <div class="post-meta">
@@ -561,16 +506,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/12/575-haicais-357-haicai-recontinuar/">
-
     
 
     <div class="post-meta">
@@ -582,16 +526,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/12/575-haicais-351-haicai-hiperativo/">
-
     
 
     <div class="post-meta">
@@ -603,16 +546,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/12/575-haicais-347-haicai-aos-sabados/">
-
     
 
     <div class="post-meta">
@@ -624,22 +566,21 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/11/575-haicais-323-haicai-de-programa/">
-
     
 
     <div class="post-meta">
@@ -651,16 +592,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/11/575-haicais-320-haicai-distraido/">
-
     
 
     <div class="post-meta">
@@ -672,16 +612,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/11/575-haicais-311-haicai-em-chiaroscuro/">
-
     
 
     <div class="post-meta">
@@ -693,16 +632,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/11/575-haicais-310-haiku-impressionniste/">
-
     
 
     <div class="post-meta">
@@ -714,20 +652,19 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/10/575-haicais-296-haicai-tampouco/">
-
     
 
     <div class="post-meta">
@@ -739,16 +676,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/10/575-haicais-293-haicai-de-pai/">
-
     
 
     <div class="post-meta">
@@ -760,16 +696,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/10/575-haicais-288-haicai-de-coabito/">
-
     
 
     <div class="post-meta">
@@ -781,16 +716,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/10/575-haicais-287-haicai-de-faxina/">
-
     
 
     <div class="post-meta">
@@ -802,16 +736,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/10/575-haicais-286-haicai-de-recursos-humanos/">
-
     
 
     <div class="post-meta">
@@ -823,16 +756,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/10/575-haicais-276-haicai-de-fome/">
-
     
 
     <div class="post-meta">
@@ -844,16 +776,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/10/575-haicais-275-haicai-compensatorio/">
-
     
 
     <div class="post-meta">
@@ -865,16 +796,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/09/575-haicais-273-haicai-de-paradeiro/">
-
     
 
     <div class="post-meta">
@@ -886,16 +816,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/09/575-haicais-272-haicai-geracional/">
-
     
 
     <div class="post-meta">
@@ -907,16 +836,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/09/575-haicais-271-haicai-de-parabens/">
-
     
 
     <div class="post-meta">
@@ -928,16 +856,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/09/575-haicais-260-haicai-de-skank/">
-
     
 
     <div class="post-meta">
@@ -949,16 +876,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/09/575-haicais-259-haicai-de-burnout/">
-
     
 
     <div class="post-meta">
@@ -970,16 +896,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/09/575-haicais-258-haicai-de-sonho/">
-
     
 
     <div class="post-meta">
@@ -991,16 +916,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/09/575-haicais-253-haicai-regado/">
-
     
 
     <div class="post-meta">
@@ -1012,16 +936,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/09/575-haicais-252-haicai-podado/">
-
     
 
     <div class="post-meta">
@@ -1033,16 +956,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/09/575-haicais-250-haicai-respire/">
-
     
 
     <div class="post-meta">
@@ -1054,16 +976,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/09/575-haicais-245-haicai-eu-esqueco/">
-
     
 
     <div class="post-meta">
@@ -1075,16 +996,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/09/575-haicais-244-haicai-corrompido/">
-
     
 
     <div class="post-meta">
@@ -1096,18 +1016,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-243-haicai-de-arco-iris/">
-
     
 
     <div class="post-meta">
@@ -1119,16 +1038,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-240-haicai-so-hoje/">
-
     
 
     <div class="post-meta">
@@ -1140,16 +1058,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-239-haicai-revisto/">
-
     
 
     <div class="post-meta">
@@ -1161,16 +1078,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-238-haicai-doa-se/">
-
     
 
     <div class="post-meta">
@@ -1182,16 +1098,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-237-haicai-horizontal/">
-
     
 
     <div class="post-meta">
@@ -1203,16 +1118,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-232-haicai-bilingue/">
-
     
 
     <div class="post-meta">
@@ -1224,16 +1138,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-229-haicai-brasilis/">
-
     
 
     <div class="post-meta">
@@ -1245,16 +1158,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-228-haicai-dejavu/">
-
     
 
     <div class="post-meta">
@@ -1266,16 +1178,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-226-haicai-de-penso/">
-
     
 
     <div class="post-meta">
@@ -1287,16 +1198,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-225-haicai-extremamente-facil/">
-
     
 
     <div class="post-meta">
@@ -1308,16 +1218,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-223-haicalismo/">
-
     
 
     <div class="post-meta">
@@ -1329,16 +1238,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-221-haicai-de-pensamento/">
-
     
 
     <div class="post-meta">
@@ -1350,16 +1258,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-220-haicais-de-seria/">
-
     
 
     <div class="post-meta">
@@ -1371,18 +1278,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-217-haicai-vulneravel/">
-
     
 
     <div class="post-meta">
@@ -1394,16 +1300,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-216-haicai-tupinamba/">
-
     
 
     <div class="post-meta">
@@ -1415,18 +1320,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-215-haicai-de-passeio/">
-
     
 
     <div class="post-meta">
@@ -1438,16 +1342,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-214-haicai-amarelo/">
-
     
 
     <div class="post-meta">
@@ -1459,16 +1362,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-213-o-tempo-nao-para/">
-
     
 
     <div class="post-meta">
@@ -1480,28 +1382,27 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
+    
   
-
+    
   
-
+    
   
-
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/08/575-haicais-212-haicai-caminha/">
-
     
 
     <div class="post-meta">
@@ -1513,16 +1414,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-211-haicai-reencontrado/">
-
     
 
     <div class="post-meta">
@@ -1534,16 +1434,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-210-haicai-de-desamparo/">
-
     
 
     <div class="post-meta">
@@ -1555,16 +1454,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-209-haicai-de-imbroglio/">
-
     
 
     <div class="post-meta">
@@ -1576,18 +1474,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-208-haicai-insit/">
-
     
 
     <div class="post-meta">
@@ -1599,16 +1496,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-207-haicai-de-emergencia/">
-
     
 
     <div class="post-meta">
@@ -1620,16 +1516,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-206-haicai-comentado/">
-
     
 
     <div class="post-meta">
@@ -1641,16 +1536,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-205-haicai-essencialista/">
-
     
 
     <div class="post-meta">
@@ -1662,16 +1556,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-204-haicai-de-semeador/">
-
     
 
     <div class="post-meta">
@@ -1683,16 +1576,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-202b-haicai-a-ozzy/">
-
     
 
     <div class="post-meta">
@@ -1704,16 +1596,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-202-haicai-de-escritura/">
-
     
 
     <div class="post-meta">
@@ -1725,16 +1616,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-201-haicai-de-fofoca/">
-
     
 
     <div class="post-meta">
@@ -1746,16 +1636,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-200-haicai-de-preenchimento/">
-
     
 
     <div class="post-meta">
@@ -1767,16 +1656,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-199-haicai-a-madonna/">
-
     
 
     <div class="post-meta">
@@ -1788,16 +1676,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-198-apesar-de-voce/">
-
     
 
     <div class="post-meta">
@@ -1809,16 +1696,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-197-haicai-devirista/">
-
     
 
     <div class="post-meta">
@@ -1830,16 +1716,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-196-haicai-latino/">
-
     
 
     <div class="post-meta">
@@ -1851,20 +1736,19 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-193-haicai-de-pintura/">
-
     
 
     <div class="post-meta">
@@ -1876,16 +1760,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicai-191-haicai-de-sementes/">
-
     
 
     <div class="post-meta">
@@ -1897,16 +1780,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-190-haicai-hostil/">
-
     
 
     <div class="post-meta">
@@ -1918,16 +1800,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-189-haicai-de-mao/">
-
     
 
     <div class="post-meta">
@@ -1939,16 +1820,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-188-haicai-16mil/">
-
     
 
     <div class="post-meta">
@@ -1960,16 +1840,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-187-haicai-de-garra/">
-
     
 
     <div class="post-meta">
@@ -1981,16 +1860,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-186-haicai-de-passagem/">
-
     
 
     <div class="post-meta">
@@ -2002,16 +1880,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicai-185-haicai-temporao/">
-
     
 
     <div class="post-meta">
@@ -2023,16 +1900,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-184-haicai-de-arte/">
-
     
 
     <div class="post-meta">
@@ -2044,16 +1920,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-183-haicai-de-bailarina/">
-
     
 
     <div class="post-meta">
@@ -2065,16 +1940,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-182-haicai-pela-metade/">
-
     
 
     <div class="post-meta">
@@ -2086,16 +1960,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/07/575-haicais-181-haicai-de-convalescencia/">
-
     
 
     <div class="post-meta">
@@ -2107,16 +1980,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-180-haicai-de-resistencia/">
-
     
 
     <div class="post-meta">
@@ -2128,16 +2000,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-179-haicai-vital/">
-
     
 
     <div class="post-meta">
@@ -2149,16 +2020,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-178-haicai-mudo/">
-
     
 
     <div class="post-meta">
@@ -2170,18 +2040,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-177-haicai-de-trauma/">
-
     
 
     <div class="post-meta">
@@ -2193,16 +2062,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-176-haicai-luto/">
-
     
 
     <div class="post-meta">
@@ -2214,16 +2082,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-175-haicai-de-frete/">
-
     
 
     <div class="post-meta">
@@ -2235,16 +2102,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-174-haicai-de-mudanca/">
-
     
 
     <div class="post-meta">
@@ -2256,18 +2122,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-168-haicai-de-resmas/">
-
     
 
     <div class="post-meta">
@@ -2279,16 +2144,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-166-haicai-era-acrostico/">
-
     
 
     <div class="post-meta">
@@ -2300,16 +2164,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/haicais-acrosticos/">
-
     
 
     <div class="post-meta">
@@ -2321,18 +2184,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-165-haicai-aos-acrosticos/">
-
     
 
     <div class="post-meta">
@@ -2344,16 +2206,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-164-haicai-de-legado/">
-
     
 
     <div class="post-meta">
@@ -2365,16 +2226,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-163-haicai-a-antonia/">
-
     
 
     <div class="post-meta">
@@ -2386,16 +2246,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-162-haicai-ora-acrostico/">
-
     
 
     <div class="post-meta">
@@ -2407,18 +2266,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-161-haicai-sao-acrosticos/">
-
     
 
     <div class="post-meta">
@@ -2430,16 +2288,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-160-haicai-aos-acrosticos/">
-
     
 
     <div class="post-meta">
@@ -2451,16 +2308,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/haicais-materiais-sensiveis/">
-
     
 
     <div class="post-meta">
@@ -2472,16 +2328,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-159-haicai-de-valeu/">
-
     
 
     <div class="post-meta">
@@ -2493,16 +2348,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-158-haicai-de-quermesse/">
-
     
 
     <div class="post-meta">
@@ -2514,16 +2368,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-157-haicai-de-ontem/">
-
     
 
     <div class="post-meta">
@@ -2535,16 +2388,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-155-haicai-de-vidro/">
-
     
 
     <div class="post-meta">
@@ -2556,16 +2408,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-154-haicai-de-amizade/">
-
     
 
     <div class="post-meta">
@@ -2577,16 +2428,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-152-haicai-de-amor/">
-
     
 
     <div class="post-meta">
@@ -2598,16 +2448,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/06/575-haicais-151-haicai-de-melhores-pessoas/">
-
     
 
     <div class="post-meta">
@@ -2619,16 +2468,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-150-haicai-proibido/">
-
     
 
     <div class="post-meta">
@@ -2640,16 +2488,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-149-haicai-de-entrega/">
-
     
 
     <div class="post-meta">
@@ -2661,16 +2508,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-148-haicai-de-porcelana/">
-
     
 
     <div class="post-meta">
@@ -2682,16 +2528,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-147-haicai-de-cristais/">
-
     
 
     <div class="post-meta">
@@ -2703,16 +2548,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-146-haicai-de-louca/">
-
     
 
     <div class="post-meta">
@@ -2724,16 +2568,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-145-haicai-de-ficha/">
-
     
 
     <div class="post-meta">
@@ -2745,16 +2588,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-142-haicai-de-sono/">
-
     
 
     <div class="post-meta">
@@ -2766,16 +2608,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-141-haicai-revivido/">
-
     
 
     <div class="post-meta">
@@ -2787,16 +2628,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-135-haicai-de-passagem/">
-
     
 
     <div class="post-meta">
@@ -2808,20 +2648,19 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-133-haicai-a-mujica/">
-
     
 
     <div class="post-meta">
@@ -2833,16 +2672,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-132-haicai-de-pet/">
-
     
 
     <div class="post-meta">
@@ -2854,16 +2692,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-131-haicai-de-vazio/">
-
     
 
     <div class="post-meta">
@@ -2875,16 +2712,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-130-haicai-de-acaso/">
-
     
 
     <div class="post-meta">
@@ -2896,16 +2732,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-129-haicai-de-enterrador/">
-
     
 
     <div class="post-meta">
@@ -2917,16 +2752,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-128-haicai-de-nunca-mais/">
-
     
 
     <div class="post-meta">
@@ -2938,16 +2772,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-127-haicai-do-garoto/">
-
     
 
     <div class="post-meta">
@@ -2959,16 +2792,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-126-haicai-eventual/">
-
     
 
     <div class="post-meta">
@@ -2980,16 +2812,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-122-haicai-de-tempo/">
-
     
 
     <div class="post-meta">
@@ -3001,16 +2832,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-121-anana-banana-ana/">
-
     
 
     <div class="post-meta">
@@ -3022,16 +2852,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/05/575-haicais-120-haicai-de-trinta/">
-
     
 
     <div class="post-meta">
@@ -3043,16 +2872,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/04/575-haicais-119-haicai-de-aniversario/">
-
     
 
     <div class="post-meta">
@@ -3064,16 +2892,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/04/575-haicais-118-haicai-original/">
-
     
 
     <div class="post-meta">
@@ -3085,16 +2912,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/04/575-haicais-117-haicai-intimo/">
-
     
 
     <div class="post-meta">
@@ -3106,16 +2932,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/04/575-haicais-116-haicai-de-velho/">
-
     
 
     <div class="post-meta">
@@ -3127,18 +2952,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/04/575-haicais-114-haicai-desoriginalizado/">
-
     
 
     <div class="post-meta">
@@ -3150,16 +2974,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/04/575-haicais-113-haicais-de-cabeca/">
-
     
 
     <div class="post-meta">
@@ -3171,16 +2994,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/04/575-haicais-112-haicai-de-samba/">
-
     
 
     <div class="post-meta">
@@ -3192,16 +3014,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/04/575-haicais-111-haicais-coincidente/">
-
     
 
     <div class="post-meta">
@@ -3213,16 +3034,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/04/575-haicais-110-haicai-quaresmal/">
-
     
 
     <div class="post-meta">
@@ -3234,18 +3054,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/04/575-haicais-109-haicai-limerente/">
-
     
 
     <div class="post-meta">
@@ -3257,16 +3076,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/04/575-haicais-108-haicai-de-refugio/">
-
     
 
     <div class="post-meta">
@@ -3278,16 +3096,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/04/575-haicais-107-haicai-de-ruptura/">
-
     
 
     <div class="post-meta">
@@ -3299,18 +3116,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-89-haicai-de-diferenca/">
-
     
 
     <div class="post-meta">
@@ -3322,20 +3138,19 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-88-haicai-colorido/">
-
     
 
     <div class="post-meta">
@@ -3347,16 +3162,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-87-haicai-atentoh/">
-
     
 
     <div class="post-meta">
@@ -3368,18 +3182,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-82-haicai-de-coracao/">
-
     
 
     <div class="post-meta">
@@ -3391,18 +3204,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-75-haicai-a-ritalee/">
-
     
 
     <div class="post-meta">
@@ -3414,18 +3226,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-70-haicais-de-tratamento/">
-
     
 
     <div class="post-meta">
@@ -3437,16 +3248,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-69-haicai-sentido/">
-
     
 
     <div class="post-meta">
@@ -3458,16 +3268,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-68-haicai-incontido/">
-
     
 
     <div class="post-meta">
@@ -3479,16 +3288,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-67-haicai-autocorreto/">
-
     
 
     <div class="post-meta">
@@ -3500,16 +3308,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-65-haicais-substituto/">
-
     
 
     <div class="post-meta">
@@ -3521,16 +3328,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-64-haicai-insone/">
-
     
 
     <div class="post-meta">
@@ -3542,20 +3348,19 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-63-haicai-brutalista/">
-
     
 
     <div class="post-meta">
@@ -3567,16 +3372,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-62-haicai-relaxante/">
-
     
 
     <div class="post-meta">
@@ -3588,18 +3392,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-61-haicai-as-eunices/">
-
     
 
     <div class="post-meta">
@@ -3611,16 +3414,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/03/575-haicais-60-haicai-afiado/">
-
     
 
     <div class="post-meta">
@@ -3632,16 +3434,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/02/575-haicais-59-haicai-haver/">
-
     
 
     <div class="post-meta">
@@ -3653,18 +3454,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/02/575-haicais-58-tdahaicai/">
-
     
 
     <div class="post-meta">
@@ -3676,16 +3476,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/02/575-haicais-57-hai-cai-de-patins/">
-
     
 
     <div class="post-meta">
@@ -3697,16 +3496,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/02/575-haicais-56-haicai-de-onibus/">
-
     
 
     <div class="post-meta">
@@ -3718,16 +3516,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/02/haicais-enterrados/">
-
     
 
     <div class="post-meta">
@@ -3739,16 +3536,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/02/575-haicais-55-haicai-lunar/">
-
     
 
     <div class="post-meta">
@@ -3760,16 +3556,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/02/575-haicais-51-haicai-sobre-vida/">
-
     
 
     <div class="post-meta">
@@ -3781,16 +3576,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/02/haicais-de-fios-e-fe/">
-
     
 
     <div class="post-meta">
@@ -3802,16 +3596,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/02/haicais-silenciosos/">
-
     
 
     <div class="post-meta">
@@ -3823,18 +3616,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/02/haicais-haicais-sobre-nos/">
-
     
 
     <div class="post-meta">
@@ -3846,20 +3638,19 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-30-haicai-apagado/">
-
     
 
     <div class="post-meta">
@@ -3871,18 +3662,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-29-haicai-reduzido/">
-
     
 
     <div class="post-meta">
@@ -3894,16 +3684,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-27-haicai-de-autoengano/">
-
     
 
     <div class="post-meta">
@@ -3915,16 +3704,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-26-haicai-excitado/">
-
     
 
     <div class="post-meta">
@@ -3936,16 +3724,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-25-haicai-derramado/">
-
     
 
     <div class="post-meta">
@@ -3957,16 +3744,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-24-haicai-espinhoso/">
-
     
 
     <div class="post-meta">
@@ -3978,16 +3764,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-23-haicai-de-uva/">
-
     
 
     <div class="post-meta">
@@ -3999,16 +3784,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-22-haicai-aereo/">
-
     
 
     <div class="post-meta">
@@ -4020,16 +3804,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-21-haicai-citrico/">
-
     
 
     <div class="post-meta">
@@ -4041,16 +3824,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-20-haicai-de-parede/">
-
     
 
     <div class="post-meta">
@@ -4062,16 +3844,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-19-um-haicai-sobre-nos/">
-
     
 
     <div class="post-meta">
@@ -4083,16 +3864,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-18-haicai-pro-futuro/">
-
     
 
     <div class="post-meta">
@@ -4104,16 +3884,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-17-haicai-do-silencio/">
-
     
 
     <div class="post-meta">
@@ -4125,16 +3904,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-16-haicai-da-indiferenca/">
-
     
 
     <div class="post-meta">
@@ -4146,16 +3924,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-15-haicai-do-aterro/">
-
     
 
     <div class="post-meta">
@@ -4167,26 +3944,25 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
+    
   
-
+    
   
-
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-14-haicai-inaugural/">
-
     
 
     <div class="post-meta">
@@ -4198,16 +3974,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-13-haicai-do-morro/">
-
     
 
     <div class="post-meta">
@@ -4219,18 +3994,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/primeiros-haicais/">
-
     
 
     <div class="post-meta">
@@ -4242,16 +4016,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-12-haicai-fiado/">
-
     
 
     <div class="post-meta">
@@ -4263,16 +4036,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-11-haicai-doido/">
-
     
 
     <div class="post-meta">
@@ -4284,18 +4056,17 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-10-haicai-para-viagem/">
-
     
 
     <div class="post-meta">
@@ -4307,16 +4078,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-9-haicai-sobre-haicais/">
-
     
 
     <div class="post-meta">
@@ -4328,16 +4098,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-8-haicai-de-aprendizado/">
-
     
 
     <div class="post-meta">
@@ -4349,16 +4118,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-7-haicai-de-sonho/">
-
     
 
     <div class="post-meta">
@@ -4370,16 +4138,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-6-haicai-de-forca/">
-
     
 
     <div class="post-meta">
@@ -4391,16 +4158,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-5-haicai-do-grito/">
-
     
 
     <div class="post-meta">
@@ -4412,16 +4178,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-4-haicai-de-liberdade/">
-
     
 
     <div class="post-meta">
@@ -4433,16 +4198,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-3-haicai-do-compromisso/">
-
     
 
     <div class="post-meta">
@@ -4454,16 +4218,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-2-haicai-de-alma/">
-
     
 
     <div class="post-meta">
@@ -4475,16 +4238,15 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2025/01/575-haicais-1-haicai-de-ano-novo/">
-
     
 
     <div class="post-meta">
@@ -4496,24 +4258,27 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
+    
   
-
+    
   
-
+    
   
-
-  
-    <li class="post-card">
+    
+      
+      <li class="post-card">
   <a href="/2024/10/haicais-do-arvoredo/">
-
+    
+      <div class="post-cover">
+        <img src="/images/posts/haicais-do-arvoredo/f79dfa5d08f2762d07bc5f222377e413.jpg" alt="Imagem do post Haicais do Arvoredo">
+      </div>
     
 
     <div class="post-meta">
@@ -4525,192 +4290,27 @@
         </time>
       
     </div>
-
   </a>
 </li>
 
+    
   
-
+    
   
-
+    
   
-
 </ul>
 
+
     </main>
+
     <footer class="site-footer">
-      <p id="reset-storage">
-        © 2026 Ameopoema
-      </p>
-    </footer>
-    <script>
-      const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLScItpjJxsc4GOYWayWwVU-CEyxrwA_7FQtRDO_9ZB1r8rh-0w/formResponse";
-      const MIN_INTERVAL = 60 * 1000;
-      const STORAGE_KEY = "ameopoema_last_submit";
-      const SESSION_COOKIE = "ameopoema_unlocked";
-      const waitBox = document.getElementById("wait-message");
-      const waitText = waitBox.querySelector(".wait-text");
-      const cancelBtn = document.getElementById("cancel-btn");
-      const spamWords = [
-        "viagra",
-        "bitcoin",
-        "crypto",
-        "casino",
-        "ganhe dinheiro",
-        "free money",
-        "porn"
-      ];
+  <p id="reset-storage">
+    © 2026 Ameopoema
+  </p>
+</footer>
 
-      if (hasSessionUnlock()) {
-        unlock();
-      }
-      document.getElementById("gate-form").addEventListener("submit", function (e) {
-        e.preventDefault();
-        hideWait();
-        if (document.getElementById("website").value) 
-          return;
-        
-        const name = get("name");
-        const email = get("email");
-        const message = get("message");
-        if (! name || ! email || ! message) 
-          return showWait("Todos os campos precisam ser preenchidos. <br>Deixe sua mensagem. <br> Nos conte, você é um robô?");
-        
-        if (!validEmail(email)) 
-          return showWait("O email não parece válido.");
-        
-        if (looksLikeSpam(message)) 
-          return showWait("Essa mensagem parece automática demais.");
-        
-        const last = localStorage.getItem(STORAGE_KEY);
-        const now = Date.now();
-        if (last && now - last < MIN_INTERVAL) {
-          return showWait("A poesia habita no silêncio entre os versos.<br>Tente novamente daqui a 1 minuto.");
-        }
-        const form = document.createElement("form");
-        form.method = "POST";
-        form.action = FORM_ACTION;
-        form.target = "hidden_iframe";
-        form.innerHTML = `
-      <input type="hidden" name="entry.409672853" value="${
-          escapeHTML(name)
-        }">
-      <input type="hidden" name="entry.2040541815" value="${
-          escapeHTML(email)
-        }">
-      <input type="hidden" name="entry.739396940" value="${
-          escapeHTML(message)
-        }">
-    `;
-        document.body.appendChild(form);
-        form.submit();
-        document.body.removeChild(form);
-        localStorage.setItem(STORAGE_KEY, now.toString());
-        setSessionUnlock();
-        unlock();
-      });
-      function get(id) {
-        return document
-          .getElementById(id)
-          .value
-          .trim();
-      }
-      function validEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-      }
-      function looksLikeSpam(text) {
-        if (text.length < 8) 
-          return true;
-        
-        if ((text.match(/https?:\/\//g) || []).length > 2) 
-          return true;
-        
-        if (/([a-zA-Z])\1{7,}/.test(text)) 
-          return true;
-        
-        const lower = text.toLowerCase();
-        return spamWords.some(w => lower.includes(w));
-      }
-      function showWait(msg) {
-        waitText.innerHTML = msg;
-        waitBox.style.display = "block";
-      }
-      function hideWait() {
-        waitBox.style.display = "none";
-      }
-      function unlock() {
-        document
-          .getElementById("gate")
-          .style
-          .display = "none";
-        document
-          .body
-          .classList
-          .remove("locked");
-      }
-      function openGate(e) {
-        e.preventDefault();
-        if (!hasSessionUnlock()) 
-          return;
-        
 
-        document
-          .getElementById("gate")
-          .style
-          .display = "flex";
-        document
-          .body
-          .classList
-          .add("locked");
-        cancelBtn.style.display = "block";
-      }
-      function cancelGate() {
-        document
-          .getElementById("gate")
-          .style
-          .display = "none";
-        document
-          .body
-          .classList
-          .remove("locked");
-        cancelBtn.style.display = "none";
-        window.location.href = "/";
-      }
-      function escapeHTML(str) {
-        return str
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-      }
-      function hasSessionUnlock() {
-        return document.cookie
-          .split(";")
-          .map(cookie => cookie.trim())
-          .some(cookie => cookie === `${SESSION_COOKIE}=1`);
-      }
-      function setSessionUnlock() {
-        document.cookie = `${SESSION_COOKIE}=1; path=/; SameSite=Lax`;
-      }
-      function clearSessionUnlock() {
-        document.cookie = `${SESSION_COOKIE}=; path=/; Max-Age=0; SameSite=Lax`;
-      }
-      const resetBtn = document.getElementById("reset-storage");
-      resetBtn.addEventListener("click", () => {
-        localStorage.removeItem(STORAGE_KEY);
-        clearSessionUnlock();
-
-        document
-          .getElementById("gate")
-          .style
-          .display = "flex";
-        document
-          .body
-          .classList
-          .add("locked");
-        cancelBtn.style.display = "none";
-      });
-    </script>
+    <script src="/js/gate.js" defer></script>
   </body>
 </html>

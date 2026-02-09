@@ -1,0 +1,74 @@
+body.locked {
+  overflow: hidden;
+}
+
+body.locked .nav-links,
+body.locked .nav-burger {
+  display: none;
+}
+
+#gate {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.97);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#gate form {
+  max-width: 420px;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+
+#gate h1 {
+  text-align: center;
+  font-weight: normal;
+}
+
+#gate p {
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+#gate input,
+#gate textarea {
+  font-size: 1rem;
+  padding: 0.6rem;
+  width: 100%;
+}
+
+#gate button {
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 0.6rem;
+  cursor: pointer;
+}
+
+#cancel-btn {
+  background: transparent;
+  color: #111;
+  border: 1px solid #111;
+  margin-top: 0.5rem;
+  display: none;
+}
+
+#wait-message {
+  font-size: 0.85rem;
+  text-align: center;
+  color: #555;
+  display: none;
+}
+
+.gate-honeypot,
+.hidden-frame {
+  display: none;
+}
