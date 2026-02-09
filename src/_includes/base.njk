@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>{{ post.title or title or site.title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="alternate" type="application/rss+xml" title="Podcast {{ site.title }}" href="{{ '/podcast.xml' | url }}">
     <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
     <link rel="stylesheet" href="{{ '/css/gate.css' | url }}">
   </head>

@@ -1,13 +1,15 @@
 module.exports = {
   title: "Ameopoema",
   brand: "ameopoema",
+  url: "https://ameopoema.com",
   copyrightYear: 2026,
   navLinks: [
     { href: "/", label: "Início" },
     { href: "/haicais/", label: "Haicais" },
     { href: "/poesias/", label: "Poesias" },
     { href: "/textos/", label: "Textos" },
-    { href: "/print/", label: "Livros" }
+    { href: "/print/", label: "Livros" },
+    { href: "/podcast/", label: "Podcast" }
   ],
   gate: {
     formAction:

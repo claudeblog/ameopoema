@@ -1,0 +1,24 @@
+---
+layout: base.njk
+title: Podcast
+---
+
+<h1>Podcast</h1>
+<p>
+  Feed RSS: <a href="{{ podcast.feedPath | url }}">{{ podcast.feedUrl }}</a>
+</p>
+
+{% if podcast.episodes.length %}
+  {% for episode in podcast.episodes %}
+    <article id="{{ episode.slug }}">
+      <h2>{{ episode.title }}</h2>
+      <p>{{ episode.publishedAt | date("dd/MM/yyyy") }} • {{ episode.duration }}</p>
+      <p>{{ episode.description }}</p>
+      <audio controls preload="none" src="{{ episode.audioPath | url }}">
+        Seu navegador não suporta áudio embutido.
+      </audio>
+    </article>
+  {% endfor %}
+{% else %}
+  <p>Nenhum episódio disponível no momento.</p>
+{% endif %}

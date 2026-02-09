@@ -45,10 +45,12 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/images");
+  eleventyConfig.addPassthroughCopy("src/audio");
   eleventyConfig.addPassthroughCopy("src/CNAME");
 
   eleventyConfig.addWatchTarget("src/css");
   eleventyConfig.addWatchTarget("src/js");
+  eleventyConfig.addWatchTarget("src/audio");
 
   eleventyConfig.addCollection("editorialPages", () =>
     Object.entries(EDITORIAL_FILTERS).map(([slug, keywords]) => ({
@@ -68,6 +70,14 @@ module.exports = function (eleventyConfig) {
     }
 
     return DateTime.fromJSDate(dateObj).toFormat(format);
+  });
+
+  eleventyConfig.addFilter("rfc822", (dateObj) => {
+    if (!(dateObj instanceof Date) || Number.isNaN(dateObj.valueOf())) {
+      return "";
+    }
+
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toHTTP();
   });
 
   eleventyConfig.addFilter("firstImage", (html = "") => {
