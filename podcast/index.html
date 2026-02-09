@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <title>Podcast</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="alternate" type="application/rss+xml" title="Podcast Ameopoema" href="/podcast.xml">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/gate.css">
+  </head>
+
+  <body class="locked">
+    <header class="site-header">
+      <nav class="nav" aria-label="Navegação principal">
+  <div class="nav-inner">
+    <input id="nav-toggle" class="nav-toggle" type="checkbox">
+    <label for="nav-toggle" class="nav-burger" aria-label="Abrir menu">☰</label>
+    <a href="/" class="site-title">ameopoema</a>
+
+    <ul class="nav-links">
+      
+        <li>
+          <a href="/">Início</a>
+        </li>
+      
+        <li>
+          <a href="/haicais/">Haicais</a>
+        </li>
+      
+        <li>
+          <a href="/poesias/">Poesias</a>
+        </li>
+      
+        <li>
+          <a href="/textos/">Textos</a>
+        </li>
+      
+        <li>
+          <a href="/print/">Livros</a>
+        </li>
+      
+        <li>
+          <a href="/podcast/">Podcast</a>
+        </li>
+      
+      <li>
+        <a href="#" data-open-gate>Contato</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+    </header>
+
+    <div
+  id="gate"
+  data-form-action="https://docs.google.com/forms/d/e/1FAIpQLScItpjJxsc4GOYWayWwVU-CEyxrwA_7FQtRDO_9ZB1r8rh-0w/formResponse"
+  data-min-interval-ms="60000"
+  data-storage-key="ameopoema_last_submit"
+  data-session-cookie="ameopoema_unlocked"
+>
+  <form id="gate-form" novalidate>
+    <h1 class="site-title">ameopoema</h1>
+    <p>Palavras abrem portas. Deixe sua mensagem :)</p>
+
+    <input type="text" id="name" placeholder="Seu nome">
+    <input type="email" id="email" placeholder="Seu email">
+    <textarea id="message" rows="5" placeholder="Escreva algo para entrar"></textarea>
+    <input type="text" id="website" class="gate-honeypot" tabindex="-1" autocomplete="off">
+
+    <button type="submit">Entrar</button>
+    <button id="cancel-btn" type="button" class="gate-cancel">Cancelar</button>
+
+    <div id="wait-message" class="gate-wait" aria-live="polite">
+      <p class="wait-text"></p>
+    </div>
+
+    <iframe name="hidden_iframe" class="hidden-frame"></iframe>
+  </form>
+</div>
+
+
+    <main class="site-main">
+      
+<h1>Podcast</h1>
+<p>
+  Feed RSS: <a href="/podcast.xml">https://ameopoema.com/podcast.xml</a>
+</p>
+
+
+  
+    <article id="ep-001-ruido-branco-aleatorio">
+      <h2>Episódio 001: Ruído Branco Aleatório</h2>
+      <p>09/02/2026 • 00:27</p>
+      <p>Faixa experimental criada com ruído branco aleatório para iniciar o feed de podcast do Ameopoema.</p>
+      <audio controls preload="none" src="/audio/podcast/episodio-001.mp3">
+        Seu navegador não suporta áudio embutido.
+      </audio>
+    </article>
+  
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p id="reset-storage">
+    © 2026 Ameopoema
+  </p>
+</footer>
+
+
+    <script src="/js/gate.js" defer></script>
+  </body>
+</html>

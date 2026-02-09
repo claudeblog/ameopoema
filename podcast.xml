@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ameopoema Podcast</title>
+    <link>https://ameopoema.com</link>
+    <language>pt-BR</language>
+    <description>Podcast literário do Ameopoema com leituras e experimentos sonoros relacionados à poesia e escrita.</description>
+    <lastBuildDate>Mon, 09 Feb 2026 09:35:00 GMT</lastBuildDate>
+    <copyright>© 2026 Ameopoema</copyright>
+    <generator>Eleventy</generator>
+    <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <atom:link href="https://ameopoema.com/podcast.xml" rel="self" type="application/rss+xml" />
+
+    <itunes:type>episodic</itunes:type>
+    <itunes:author>Ameopoema</itunes:author>
+    <itunes:summary>Podcast literário do Ameopoema com leituras poéticas e experimentos sonoros.</itunes:summary>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:image href="https://ameopoema.com/images/podcast-cover.jpg" />
+    <itunes:owner>
+      <itunes:name>Ameopoema</itunes:name>
+      <itunes:email>contato@ameopoema.com</itunes:email>
+    </itunes:owner>
+
+
+    <itunes:category text="Arts">
+      <itunes:category text="Books" />
+    </itunes:category>
+
+
+
+    <itunes:category text="Society &amp; Culture">
+      <itunes:category text="Personal Journals" />
+    </itunes:category>
+
+
+
+    <item>
+      <title>Episódio 001: Ruído Branco Aleatório</title>
+      <description>Faixa experimental criada com ruído branco aleatório para iniciar o feed de podcast do Ameopoema.</description>
+      <link>https://ameopoema.com/podcast/#ep-001-ruido-branco-aleatorio</link>
+      <guid isPermaLink="false">https://ameopoema.com/podcast/#ep-001-ruido-branco-aleatorio</guid>
+      <pubDate>Mon, 09 Feb 2026 09:35:00 GMT</pubDate>
+      <enclosure
+        url="https://ameopoema.com/audio/podcast/episodio-001.mp3"
+        length="324837"
+        type="audio/mpeg" />
+      <itunes:author>Ameopoema</itunes:author>
+      <itunes:summary>Faixa experimental criada com ruído branco aleatório para iniciar o feed de podcast do Ameopoema.</itunes:summary>
+      <itunes:duration>00:27</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:image href="https://ameopoema.com/images/podcast-cover.jpg" />
+    </item>
+
+  </channel>
+</rss>
