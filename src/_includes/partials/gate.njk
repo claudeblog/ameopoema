@@ -1,0 +1,26 @@
+<div
+  id="gate"
+  data-form-action="{{ site.gate.formAction }}"
+  data-min-interval-ms="{{ site.gate.minIntervalMs }}"
+  data-storage-key="{{ site.gate.storageKey }}"
+  data-session-cookie="{{ site.gate.sessionCookie }}"
+>
+  <form id="gate-form" novalidate>
+    <h1 class="site-title">{{ site.brand }}</h1>
+    <p>Palavras abrem portas. Deixe sua mensagem :)</p>
+
+    <input type="text" id="name" placeholder="Seu nome">
+    <input type="email" id="email" placeholder="Seu email">
+    <textarea id="message" rows="5" placeholder="Escreva algo para entrar"></textarea>
+    <input type="text" id="website" class="gate-honeypot" tabindex="-1" autocomplete="off">
+
+    <button type="submit">Entrar</button>
+    <button id="cancel-btn" type="button" class="gate-cancel">Cancelar</button>
+
+    <div id="wait-message" class="gate-wait" aria-live="polite">
+      <p class="wait-text"></p>
+    </div>
+
+    <iframe name="hidden_iframe" class="hidden-frame"></iframe>
+  </form>
+</div>

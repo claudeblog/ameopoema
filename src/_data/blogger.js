@@ -1,29 +1,25 @@
-const EleventyFetch = require("@11ty/eleventy-fetch");
-const Parser = require("rss-parser");
-const parser = new Parser();
+const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
-const crypto = require("crypto");
 
+const EleventyFetch = require("@11ty/eleventy-fetch");
+const Parser = require("rss-parser");
+
+const parser = new Parser();
+
+const FEED_URL = "https://ameopoemaameopoema.blogspot.com/feeds/posts/default";
+const FEED_BATCH_SIZE = 150;
+const FEED_CACHE_DURATION = "5m";
+const IMAGE_CACHE_DURATION = "1y";
 const IMAGES_DIR = path.join("_site", "images", "posts");
 
-function slugify(str) {
-  return str
+function slugify(value) {
+  return String(value)
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
-}
-
-async function downloadImage(url, dest) {
-  const buffer = await EleventyFetch(url, {
-    duration: "1y",
-    type: "buffer"
-  });
-
-  fs.mkdirSync(path.dirname(dest), { recursive: true });
-  fs.writeFileSync(dest, buffer);
 }
 
 function hashFilename(url) {
@@ -32,82 +28,126 @@ function hashFilename(url) {
   return `${hash}${ext}`;
 }
 
-module.exports = async function () {
-  const baseUrl = "https://ameopoemaameopoema.blogspot.com/feeds/posts/default";
-  const batchSize = 150;
-  let allItems = [];
-  let index = 1;
-  let more = true;
+function parseDate(value, fallback = new Date()) {
+  const parsed = value ? new Date(value) : fallback;
+  return Number.isNaN(parsed.valueOf()) ? fallback : parsed;
+}
 
-  while (more) {
-    const url = `${baseUrl}?start-index=${index}&max-results=${batchSize}`;
-    const xml = await EleventyFetch(url, {
-      duration: "5m",
-      type: "text"
-    });
+function normalizeTitle(value) {
+  if (typeof value === "string") {
+    return value;
+  }
 
-    const feed = await parser.parseString(xml);
-    const items = feed.items || [];
+  return value?.value || value?._ || "";
+}
 
-    allItems.push(...items);
+function buildPermalink(date, slug) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  return `/${year}/${month}/${slug}/`;
+}
 
-    if (items.length < batchSize) {
-      more = false;
-    } else {
-      index += batchSize;
+async function fetchBatch(startIndex) {
+  const url = `${FEED_URL}?start-index=${startIndex}&max-results=${FEED_BATCH_SIZE}`;
+  const xml = await EleventyFetch(url, {
+    duration: FEED_CACHE_DURATION,
+    type: "text"
+  });
+
+  const feed = await parser.parseString(xml);
+  return feed.items || [];
+}
+
+async function fetchAllFeedItems() {
+  const items = [];
+  let startIndex = 1;
+  let hasMore = true;
+
+  while (hasMore) {
+    const batch = await fetchBatch(startIndex);
+    items.push(...batch);
+
+    if (batch.length < FEED_BATCH_SIZE) {
+      hasMore = false;
+      continue;
+    }
+
+    startIndex += FEED_BATCH_SIZE;
+  }
+
+  return items.reverse();
+}
+
+async function downloadImage(url, localPath) {
+  const buffer = await EleventyFetch(url, {
+    duration: IMAGE_CACHE_DURATION,
+    type: "buffer"
+  });
+
+  fs.mkdirSync(path.dirname(localPath), { recursive: true });
+  fs.writeFileSync(localPath, buffer);
+}
+
+async function ensureLocalImage(postSlug, imageUrl) {
+  const filename = hashFilename(imageUrl);
+  const localPath = path.join(IMAGES_DIR, postSlug, filename);
+
+  if (!fs.existsSync(localPath)) {
+    await downloadImage(imageUrl, localPath);
+  }
+
+  return `/images/posts/${postSlug}/${filename}`;
+}
+
+function getExternalImageUrls(content) {
+  const imageMatches = content.matchAll(/<img[^>]+src=["']([^"']+)["']/gi);
+  const urls = [];
+
+  for (const match of imageMatches) {
+    const imageUrl = match[1];
+
+    if (!imageUrl.startsWith("http")) {
+      continue;
+    }
+
+    if (!urls.includes(imageUrl)) {
+      urls.push(imageUrl);
     }
   }
 
-  allItems.reverse();
+  return urls;
+}
 
-  return await Promise.all(
-    allItems.map(async (item) => {
-      const publishedDate = item.pubDate
-        ? new Date(item.pubDate)
-        : new Date();
+async function localizePostImages(postSlug, content = "") {
+  let localizedContent = content;
+  const imageUrls = getExternalImageUrls(localizedContent);
 
-      const slug = slugify(item.title);
-      const postImageDir = path.join(IMAGES_DIR, slug);
+  for (const imageUrl of imageUrls) {
+    const publicPath = await ensureLocalImage(postSlug, imageUrl);
+    localizedContent = localizedContent.split(imageUrl).join(publicPath);
+  }
 
-      let content = item.content || "";
+  return localizedContent;
+}
 
-      // encontra <img src="">
-      const imgRegex = /<img[^>]+src=["']([^"']+)["']/gi;
-      let match;
+async function mapItemToPost(item) {
+  const title = normalizeTitle(item.title);
+  const published = parseDate(item.pubDate);
+  const updated = parseDate(item.isoDate, published);
+  const slug = slugify(title);
+  const content = await localizePostImages(slug, item.content || "");
 
-      while ((match = imgRegex.exec(content)) !== null) {
-        const imageUrl = match[1];
+  return {
+    id: item.guid || item.link,
+    title,
+    content,
+    published,
+    updated,
+    permalink: buildPermalink(published, slug)
+  };
+}
 
-        // ignora imagens já locais
-        if (!imageUrl.startsWith("http")) continue;
-
-        const filename = hashFilename(imageUrl);
-        const localPath = path.join(postImageDir, filename);
-        const pathPrefix = "";
-        const publicPath = `${pathPrefix}/images/posts/${slug}/${filename}`;
-
-        if (!fs.existsSync(localPath)) {
-          await downloadImage(imageUrl, localPath);
-        }
-
-        content = content.replace(imageUrl, publicPath);
-      }
-
-      return {
-        id: item.guid || item.link,
-        title:
-          typeof item.title === "string"
-            ? item.title
-            : item.title?.value || item.title?._ || "",
-        content,
-        published: publishedDate,
-        updated: item.isoDate
-          ? new Date(item.isoDate)
-          : publishedDate,
-        permalink: `/${publishedDate.getFullYear()}/${String(
-          publishedDate.getMonth() + 1
-        ).padStart(2, "0")}/${slug}/`
-      };
-    })
-  );
+module.exports = async function () {
+  const items = await fetchAllFeedItems();
+  return Promise.all(items.map(mapItemToPost));
 };

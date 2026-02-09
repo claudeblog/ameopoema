@@ -5,15 +5,7 @@ title: "Obra Completa"
 
 <h1>"Obra Completa"</h1>
 
-{% set allPosts = [] %}
-
 {% for post in blogger %}
-    {% set allPosts = allPosts.concat([post]) %}
-{% endfor %}
-
-{% for post in allPosts %}
-<article>
-  <h2>{{ post.title }}</h2>
-  {{ post.content | safe }}
-</article>
+  {% set printPost = post %}
+  {% include "partials/print-article.njk" %}
 {% endfor %}

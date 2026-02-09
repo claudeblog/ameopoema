@@ -1,9 +1,8 @@
 <li class="post-card">
   <a href="{{ post.permalink | url }}">
-
     {% if cover %}
       <div class="post-cover">
-        <img src="{{ cover | url}}" alt="">
+        <img src="{{ cover | url }}" alt="Imagem do post {{ post.title }}">
       </div>
     {% endif %}
 
@@ -16,6 +15,5 @@
         </time>
       {% endif %}
     </div>
-
   </a>
 </li>

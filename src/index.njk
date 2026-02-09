@@ -5,10 +5,5 @@ title: Ameopoema
 
 <h1>Blog</h1>
 
-<ul class="post-list">
-{% for post in blogger | reverse %}
-  {% set cover = post.content | firstImage %}
-
-  {% include "post-card.njk" %}
-{% endfor %}
-</ul>
+{% set posts = blogger %}
+{% include "partials/post-list.njk" %}

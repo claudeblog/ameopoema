@@ -1,0 +1,18 @@
+<nav class="nav" aria-label="Navegação principal">
+  <div class="nav-inner">
+    <input id="nav-toggle" class="nav-toggle" type="checkbox">
+    <label for="nav-toggle" class="nav-burger" aria-label="Abrir menu">☰</label>
+    <a href="{{ '/' | url }}" class="site-title">{{ site.brand }}</a>
+
+    <ul class="nav-links">
+      {% for link in site.navLinks %}
+        <li>
+          <a href="{{ link.href | url }}">{{ link.label }}</a>
+        </li>
+      {% endfor %}
+      <li>
+        <a href="#" data-open-gate>Contato</a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -5,19 +5,7 @@ title: "575 Haicais – versão imprimível"
 
 <h1>575 Haicais</h1>
 
-{% set haicais = [] %}
-
-{% for post in blogger %}
-  {% if post | is575Haicais %}
-    {% set haicais = haicais.concat([post]) %}
-  {% endif %}
-{% endfor %}
-
-{% set haicais = haicais | sort(false, false, "haicaiNumber") %}
-
-{% for post in haicais %}
-<article>
-  <h2>{{ post.title }}</h2>
-  {{ post.content | safe }}
-</article>
+{% for post in blogger | haicaisBookPosts %}
+  {% set printPost = post %}
+  {% include "partials/print-article.njk" %}
 {% endfor %}

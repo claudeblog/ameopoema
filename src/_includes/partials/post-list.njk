@@ -1,0 +1,8 @@
+<ul class="post-list">
+  {% for post in posts | reverse %}
+    {% if not keywords or (post | matchesEditorial(keywords)) %}
+      {% set cover = post.content | firstImage %}
+      {% include "post-card.njk" %}
+    {% endif %}
+  {% endfor %}
+</ul>

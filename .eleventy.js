@@ -1,83 +1,99 @@
 const { DateTime } = require("luxon");
 
-const editorialFilters = {
+const EDITORIAL_FILTERS = Object.freeze({
   haicais: ["haicai", "haikai"],
   poesias: ["poesia", "poema", "poesias", "poemas"],
-  textos: ["texto", "textículo"]
-};
+  textos: ["texto", "texticulo", "textículo"]
+});
+
+const HAICAI_TITLE_REGEX = /^575 Haicais\s+(\d+)/i;
+
+function normalizeText(value = "") {
+  return String(value).toLowerCase();
+}
+
+function getPostTags(post) {
+  const categories = Array.isArray(post?.categories) ? post.categories : [];
+  return categories.map(normalizeText);
+}
+
+function postMatchesKeywords(post, keywords = []) {
+  if (!post || !post.title || !Array.isArray(keywords)) {
+    return false;
+  }
+
+  const title = normalizeText(post.title);
+  const tags = getPostTags(post);
+
+  return keywords.some((keyword) => {
+    const normalizedKeyword = normalizeText(keyword);
+    return title.includes(normalizedKeyword) || tags.includes(normalizedKeyword);
+  });
+}
+
+function extractHaicaiNumber(title = "") {
+  const match = String(title).match(HAICAI_TITLE_REGEX);
+  return match ? Number(match[1]) : 0;
+}
+
+function getEditorialTitle(slug) {
+  return slug.charAt(0).toUpperCase() + slug.slice(1);
+}
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/favicon.ico");
   eleventyConfig.addPassthroughCopy("src/css");
+  eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/images");
   eleventyConfig.addPassthroughCopy("src/CNAME");
 
-  eleventyConfig.addCollection("editorialPages", () => {
-    return Object.entries(editorialFilters).map(([slug, keywords]) => ({
+  eleventyConfig.addWatchTarget("src/css");
+  eleventyConfig.addWatchTarget("src/js");
+
+  eleventyConfig.addCollection("editorialPages", () =>
+    Object.entries(EDITORIAL_FILTERS).map(([slug, keywords]) => ({
       slug,
-      title: slug.charAt(0).toUpperCase() + slug.slice(1),
+      title: getEditorialTitle(slug),
       keywords
-    }));
-  });
+    }))
+  );
 
-  eleventyConfig.addFilter("matchesEditorial", (post, keywords) => {
-    if (!post || !post.title) return false;
-    const title = post.title.toLowerCase();
-    const tags = (post.categories || []).map(t => t.toLowerCase());
-
-    return keywords.some(k =>
-      title.includes(k) || tags.includes(k)
-    );
-  });
+  eleventyConfig.addFilter("matchesEditorial", (post, keywords) =>
+    postMatchesKeywords(post, keywords)
+  );
 
   eleventyConfig.addFilter("date", (dateObj, format = "dd/MM/yyyy") => {
+    if (!(dateObj instanceof Date) || Number.isNaN(dateObj.valueOf())) {
+      return "";
+    }
+
     return DateTime.fromJSDate(dateObj).toFormat(format);
   });
 
-  eleventyConfig.addFilter("firstImage", (html) => {
-    if (!html) return null;
-    const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+  eleventyConfig.addFilter("firstImage", (html = "") => {
+    const match = String(html).match(/<img[^>]+src=["']([^"']+)["']/i);
     return match ? match[1] : null;
   });
 
-  eleventyConfig.addFilter("hasKeyword", (post, keywords) => {
-    if (!post || !post.title) return false;
-    const title = post.title.toLowerCase();
-    const tags = (post.categories || []).map(t => t.toLowerCase());
+  eleventyConfig.addFilter("is575Haicais", (post) =>
+    extractHaicaiNumber(post?.title) > 0
+  );
 
-    return keywords.some(k =>
-      title.includes(k) || tags.includes(k)
-    );
-  });
+  eleventyConfig.addFilter("haicaiNumber", (post) =>
+    extractHaicaiNumber(post?.title)
+  );
 
-  eleventyConfig.addFilter("is575Haicais", (post) => {
-    if (!post || !post.title) return false;
-    return /^575 Haicais\s+\d+/i.test(post.title);
-  });
-
-  eleventyConfig.addFilter("haicaiNumber", (post) => {
-    if (!post || !post.title) return 0;
-    const match = post.title.match(/575 Haicais\s+(\d+)/i);
-    return match ? Number(match[1]) : 0;
-  });
-
-  eleventyConfig.addCollection("livro575Haicais", (collectionApi) => {
-
-    const posts = collectionApi.getFilteredByGlob("src/posts/**/*.njk");
+  eleventyConfig.addFilter("haicaisBookPosts", (posts) => {
+    if (!Array.isArray(posts)) {
+      return [];
+    }
 
     return posts
-      .filter(item => {
-        const title = item.data?.title || "";
-        return /^575 Haicais\s+\d+/i.test(title);
-      })
-      .sort((a, b) => {
-        const getNumber = (item) => {
-          const match = item.data.title.match(/575 Haicais\s+(\d+)/i);
-          return match ? Number(match[1]) : 0;
-        };
-
-        return getNumber(a) - getNumber(b);
-      });
+      .filter((post) => extractHaicaiNumber(post?.title) > 0)
+      .sort(
+        (a, b) =>
+          extractHaicaiNumber(a?.title) - extractHaicaiNumber(b?.title)
+      );
   });
 
   return {

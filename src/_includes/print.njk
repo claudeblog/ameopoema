@@ -1,25 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ title }}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
+    <link rel="stylesheet" href="{{ '/css/print.css' | url }}">
+  </head>
 
-  <style>
-
-    article {
-      page-break-after: always;
-    }
-
-  
-  </style>
-</head>
-
-<body>
-  <main>
-    {{ content | safe }}
-  </main>
-</body>
+  <body>
+    <main class="site-main print-main">
+      {{ content | safe }}
+    </main>
+  </body>
 </html>
