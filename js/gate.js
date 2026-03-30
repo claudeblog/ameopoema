@@ -77,10 +77,11 @@
 
   function hasSessionUnlock() {
 
-    return true || document.cookie
-      .split(";")
-      .map((cookie) => cookie.trim())
-      .some((cookie) => cookie === `${sessionCookie}=1`);
+    return true 
+    // document.cookie
+    //  .split(";")
+    //  .map((cookie) => cookie.trim())
+    //  .some((cookie) => cookie === `${sessionCookie}=1`);
   }
 
   function setSessionUnlock() {
