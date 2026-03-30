@@ -1,6 +1,8 @@
 (function () {
   "use strict";
 
+  setSessionUnlock();
+  
   const gate = document.getElementById("gate");
   const gateForm = document.getElementById("gate-form");
 
